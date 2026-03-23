@@ -7,4 +7,11 @@ public class Vanzare
 	public ProdusLemn Produs { get; set; }
 	public double Cantitate { get; set; }
 	public DateTime Data { get; set; }
+
+	public void Afiseaza()
+	{
+		Console.WriteLine($"  ID: {Id} | Data: {Data:dd/MM/yyyy} | " +
+						  $"Client: {Client.Nume} | Produs: {Produs.TipProdus} | " +
+						  $"Cantitate: {Cantitate} mc");
+	}
 }
