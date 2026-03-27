@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Security.Claims;
-
+using LibrarieModele;
 class Program
 {
 	static Gestiune gestiune = new Gestiune();

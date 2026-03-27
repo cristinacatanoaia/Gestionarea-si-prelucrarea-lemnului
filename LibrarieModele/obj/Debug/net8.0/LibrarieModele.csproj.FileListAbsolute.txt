@@ -1,0 +1,12 @@
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\bin\Debug\net8.0\LibrarieModele.deps.json
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\bin\Debug\net8.0\LibrarieModele.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\bin\Debug\net8.0\LibrarieModele.pdb
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\LibrarieModele.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\LibrarieModele.AssemblyInfoInputs.cache
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\LibrarieModele.AssemblyInfo.cs
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\LibrarieModele.csproj.CoreCompileInputs.cache
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\LibrarieModele.sourcelink.json
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\LibrarieModele.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\refint\LibrarieModele.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\LibrarieModele.pdb
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\ref\LibrarieModele.dll

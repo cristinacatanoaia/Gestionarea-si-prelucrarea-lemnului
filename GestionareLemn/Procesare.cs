@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using LibrarieModele;
 public class Procesare
 {
 	public int Id { get; set; }

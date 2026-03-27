@@ -13,3 +13,9 @@ C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\GestionareLemn\obj\Debug
 C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\GestionareLemn\obj\Debug\net8.0\GestionareLemn.pdb
 C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\GestionareLemn\obj\Debug\net8.0\GestionareLemn.genruntimeconfig.cache
 C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\GestionareLemn\obj\Debug\net8.0\ref\GestionareLemn.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\GestionareLemn\obj\Debug\net8.0\GestionareLemn.csproj.AssemblyReference.cache
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\GestionareLemn\bin\Debug\net8.0\LibrarieModele.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\GestionareLemn\bin\Debug\net8.0\NivelStocareDate.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\GestionareLemn\bin\Debug\net8.0\LibrarieModele.pdb
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\GestionareLemn\bin\Debug\net8.0\NivelStocareDate.pdb
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\GestionareLemn\obj\Debug\net8.0\Gestiona.FBD44C74.Up2Date
