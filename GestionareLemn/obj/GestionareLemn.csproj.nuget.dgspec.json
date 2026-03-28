@@ -188,7 +188,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\crist\\source\\repos\\AplicatiePiu\\GestionareLemn\\LibrarieModele\\LibrarieModele.csproj": {
+                "projectPath": "C:\\Users\\crist\\source\\repos\\AplicatiePiu\\GestionareLemn\\LibrarieModele\\LibrarieModele.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

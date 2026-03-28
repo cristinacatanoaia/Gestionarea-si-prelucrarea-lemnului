@@ -10,3 +10,7 @@ C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Deb
 C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\refint\NivelStocareDate.dll
 C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.pdb
 C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\ref\NivelStocareDate.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\bin\Debug\net8.0\LibrarieModele.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\bin\Debug\net8.0\LibrarieModele.pdb
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.csproj.AssemblyReference.cache
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelSto.ECC26E05.Up2Date

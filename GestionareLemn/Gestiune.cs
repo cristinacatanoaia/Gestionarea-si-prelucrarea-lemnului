@@ -83,7 +83,7 @@ public class Gestiune
 		bool gasit = false;
 		foreach (LemnBrut l in StocLemn)
 		{
-			if (l.TipLemn.ToLower().Contains(cautare))
+			if (l.TipLemn.ToString().ToLower().Contains(cautare))
 			{
 				l.Afiseaza();
 				gasit = true;
@@ -388,7 +388,7 @@ public class Gestiune
 			Email = "office@casalemn.ro"
 		});
 
-		StocLemn.Add(new LemnBrut { Id = 1, TipLemn = "Molid", CantitateMc = 150.0 });
-		StocLemn.Add(new LemnBrut { Id = 2, TipLemn = "Fag", CantitateMc = 80.0 });
+		StocLemn.Add(new LemnBrut { Id = 1, TipLemn = TipLemnEnum.Molid, CantitateMc = 150.0 });
+		StocLemn.Add(new LemnBrut { Id = 2, TipLemn = TipLemnEnum.Fag, CantitateMc = 80.0 });
 	}
 }
