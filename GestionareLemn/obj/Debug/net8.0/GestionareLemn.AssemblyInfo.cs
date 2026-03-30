@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GestionareLemn")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+151b3e59c52f769da7a87108353c2398b25dac04")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d7c86af3b3017fb15e995e97dca9dc3c72ab7803")]
 [assembly: System.Reflection.AssemblyProductAttribute("GestionareLemn")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GestionareLemn")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

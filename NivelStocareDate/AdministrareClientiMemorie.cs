@@ -7,37 +7,47 @@ using LibrarieModele;
 
 namespace NivelStocareDate
 {
-	public class AdministrareClientiMemorie
+	public class AdministrareClientiMemorie : IStocareClienti
+
 	{
 		private List<Client> clienti = new List<Client>();
-
 		
-		public void Add(Client client)
+
+		public void AddClient(Client client)
 		{
 			client.Id = GetNextId();
 			clienti.Add(client);
 		}
 
 		
-		public List<Client> GetAll()
+		public List<Client> GetClienti()
 		{
 			return clienti;
 		}
 
 		
-		public Client GetById(int id)
+		public Client GetClient(int id)
 		{
 			return clienti.FirstOrDefault(c => c.Id == id);
 		}
 
 	
-		public Client GetByNume(string nume)
+		public Client GetClient(string nume)
 		{
 			return clienti.FirstOrDefault(c =>c.Nume.Equals(nume, StringComparison.OrdinalIgnoreCase));
 		}
 
-		
-		public int GetNextId()
+		public bool UpdateClient(Client clientActualizat)
+		{
+			Client clientExistent = clienti.FirstOrDefault(c => c.Id == clientActualizat.Id);
+			if (clientExistent == null) return false;
+			clientExistent.Nume = clientActualizat.Nume;
+			clientExistent.Telefon = clientActualizat.Telefon;
+			clientExistent.Email = clientActualizat.Email;
+			return true;
+		}
+
+		private int GetNextId()
 		{
 			if (clienti.Count == 0) return 1;
 			return clienti.Last().Id + 1;
