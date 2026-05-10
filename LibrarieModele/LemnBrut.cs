@@ -1,6 +1,10 @@
+<<<<<<< HEAD
+﻿namespace LibrarieModele
+=======
 ﻿using System;
 
 namespace LibrarieModele
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 {
 	public enum TipLemnEnum
 	{
@@ -10,6 +14,10 @@ namespace LibrarieModele
 		Stejar,
 		Pin
 	}
+<<<<<<< HEAD
+
+=======
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 	public class LemnBrut
 	{
 		private const char SEPARATOR_PRINCIPAL_FISIER = ';';
@@ -20,7 +28,13 @@ namespace LibrarieModele
 		public int Id { get; set; }
 		public TipLemnEnum TipLemn { get; set; }
 		public double CantitateMc { get; set; }
+<<<<<<< HEAD
+
 		public LemnBrut() { }
+
+=======
+		public LemnBrut() { }
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 		public LemnBrut(string linieFisier)
 		{
 			string[] dateFisier = linieFisier.Split(SEPARATOR_PRINCIPAL_FISIER);
@@ -28,6 +42,10 @@ namespace LibrarieModele
 			this.TipLemn = (TipLemnEnum)Enum.Parse(typeof(TipLemnEnum), dateFisier[TIP_LEMN]);
 			this.CantitateMc = Convert.ToDouble(dateFisier[CANTITATE]);
 		}
+<<<<<<< HEAD
+
+=======
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 		public string ConversieLaSirPentruFisier()
 		{
 			return string.Format("{1}{0}{2}{0}{3}",
@@ -36,6 +54,8 @@ namespace LibrarieModele
 				TipLemn.ToString(),
 				CantitateMc.ToString());
 		}
+<<<<<<< HEAD
+=======
 		public static LemnBrut CitesteDeLatastatura(int id)
 		{
 			LemnBrut l = new LemnBrut();
@@ -68,5 +88,6 @@ namespace LibrarieModele
 		{
 			Console.WriteLine($"  ID: {Id} | Tip: {TipLemn} | Cantitate: {CantitateMc} mc");
 		}
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 	}
 }

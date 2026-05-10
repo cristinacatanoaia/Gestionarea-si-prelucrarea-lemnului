@@ -1,6 +1,10 @@
+<<<<<<< HEAD
+﻿namespace LibrarieModele
+=======
 ﻿using System;
 
 namespace LibrarieModele
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 {
 	[Flags]
 	public enum CaracteristiciProdus
@@ -12,12 +16,18 @@ namespace LibrarieModele
 		Ignifugat = 8,
 		Certificat = 16
 	}
+<<<<<<< HEAD
+
+=======
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 	public class ProdusLemn
 	{
 		public int Id { get; set; }
 		public string TipProdus { get; set; }
 		public double Cantitate { get; set; }
 		public CaracteristiciProdus Caracteristici { get; set; }
+<<<<<<< HEAD
+=======
 		public static ProdusLemn CitesteDeLatastatura(int id)
 		{
 			ProdusLemn p = new ProdusLemn();
@@ -65,5 +75,6 @@ namespace LibrarieModele
 		{
 			Console.WriteLine($"  ID: {Id} | Tip: {TipProdus} | Cantitate: {Cantitate} mc | Caracteristici: {Caracteristici}");
 		}
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 	}
 }

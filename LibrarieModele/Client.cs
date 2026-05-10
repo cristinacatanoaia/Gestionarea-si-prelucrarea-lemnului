@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+﻿namespace LibrarieModele
+{
+	public class Client
+	{
+=======
 ﻿using System;
 
 namespace LibrarieModele
@@ -5,22 +11,32 @@ namespace LibrarieModele
 	public class Client
 	{
 
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 		private const char SEPARATOR_PRINCIPAL_FISIER = ';';
 		private const int ID = 0;
 		private const int NUME = 1;
 		private const int TELEFON = 2;
 		private const int EMAIL = 3;
+<<<<<<< HEAD
+
+=======
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 		public int Id { get; set; }
 		public string Nume { get; set; }
 		public string Telefon { get; set; }
 		public string Email { get; set; }
 
+<<<<<<< HEAD
+		public Client() { }
+
+=======
 		public Client()
 		{
 			Nume = string.Empty;
 			Telefon = string.Empty;
 			Email = string.Empty;
 		}
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 		public Client(string linieFisier)
 		{
 			string[] dateFisier = linieFisier.Split(SEPARATOR_PRINCIPAL_FISIER);
@@ -29,6 +45,10 @@ namespace LibrarieModele
 			this.Telefon = dateFisier[TELEFON];
 			this.Email = dateFisier[EMAIL];
 		}
+<<<<<<< HEAD
+
+=======
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 		public string ConversieLaSirPentruFisier()
 		{
 			return string.Format("{1}{0}{2}{0}{3}{0}{4}",
@@ -38,6 +58,8 @@ namespace LibrarieModele
 				Telefon ?? "NECUNOSCUT",
 				Email ?? "NECUNOSCUT");
 		}
+<<<<<<< HEAD
+=======
 
 		public static Client CitesteDeLatastatura(int id)
 		{
@@ -60,5 +82,6 @@ namespace LibrarieModele
 		{
 			Console.WriteLine($"  ID: {Id} | Nume: {Nume} | Telefon: {Telefon} | Email: {Email}");
 		}
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 	}
 }

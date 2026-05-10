@@ -10,3 +10,17 @@ C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug
 C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\refint\LibrarieModele.dll
 C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\LibrarieModele.pdb
 C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\LibrarieModele\obj\Debug\net8.0\ref\LibrarieModele.dll
+<<<<<<< HEAD
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\LibrarieModele\bin\Debug\net8.0\LibrarieModele.deps.json
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\LibrarieModele\bin\Debug\net8.0\LibrarieModele.dll
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\LibrarieModele\bin\Debug\net8.0\LibrarieModele.pdb
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\LibrarieModele\obj\Debug\net8.0\LibrarieModele.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\LibrarieModele\obj\Debug\net8.0\LibrarieModele.AssemblyInfoInputs.cache
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\LibrarieModele\obj\Debug\net8.0\LibrarieModele.AssemblyInfo.cs
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\LibrarieModele\obj\Debug\net8.0\LibrarieModele.csproj.CoreCompileInputs.cache
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\LibrarieModele\obj\Debug\net8.0\LibrarieModele.dll
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\LibrarieModele\obj\Debug\net8.0\refint\LibrarieModele.dll
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\LibrarieModele\obj\Debug\net8.0\LibrarieModele.pdb
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\LibrarieModele\obj\Debug\net8.0\ref\LibrarieModele.dll
+=======
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a

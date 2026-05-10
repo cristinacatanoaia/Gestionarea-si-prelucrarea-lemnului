@@ -10,16 +10,31 @@ namespace NivelStocareDate
 	public class AdministrareClientiMemorie : IStocareClienti
 
 	{
+<<<<<<< HEAD
+		static private List<Client> clienti = new List<Client>();
+=======
 		private List<Client> clienti = new List<Client>();
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 		
 
 		public void AddClient(Client client)
 		{
+<<<<<<< HEAD
+			if (client.Id <= 0)
+			{
+				client.Id = GetNextId();
+			}
+			clienti.Add(client);
+		}
+
+
+=======
 			client.Id = GetNextId();
 			clienti.Add(client);
 		}
 
 		
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 		public List<Client> GetClienti()
 		{
 			return clienti;
