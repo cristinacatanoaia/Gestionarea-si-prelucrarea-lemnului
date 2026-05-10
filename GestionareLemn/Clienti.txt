@@ -1,0 +1,2 @@
+1;Construct SRL;0740123456;contact@construct.ro
+2;Casa Lemn SRL;0751987654;office@casalemn.ro
