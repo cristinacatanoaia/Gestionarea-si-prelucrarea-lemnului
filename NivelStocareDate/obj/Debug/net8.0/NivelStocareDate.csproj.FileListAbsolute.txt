@@ -1,0 +1,31 @@
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\bin\Debug\net8.0\NivelStocareDate.deps.json
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\bin\Debug\net8.0\NivelStocareDate.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\bin\Debug\net8.0\NivelStocareDate.pdb
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.AssemblyInfoInputs.cache
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.AssemblyInfo.cs
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.csproj.CoreCompileInputs.cache
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.sourcelink.json
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\refint\NivelStocareDate.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.pdb
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\ref\NivelStocareDate.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\bin\Debug\net8.0\LibrarieModele.dll
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\bin\Debug\net8.0\LibrarieModele.pdb
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.csproj.AssemblyReference.cache
+C:\Users\crist\source\repos\AplicatiePiu\GestionareLemn\NivelStocareDate\obj\Debug\net8.0\NivelSto.ECC26E05.Up2Date
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\bin\Debug\net8.0\NivelStocareDate.deps.json
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\bin\Debug\net8.0\NivelStocareDate.dll
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\bin\Debug\net8.0\NivelStocareDate.pdb
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\bin\Debug\net8.0\LibrarieModele.dll
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\bin\Debug\net8.0\LibrarieModele.pdb
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.csproj.AssemblyReference.cache
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.AssemblyInfoInputs.cache
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.AssemblyInfo.cs
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.csproj.CoreCompileInputs.cache
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\obj\Debug\net8.0\NivelSto.ECC26E05.Up2Date
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.dll
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\obj\Debug\net8.0\refint\NivelStocareDate.dll
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\obj\Debug\net8.0\NivelStocareDate.pdb
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelStocareDate\obj\Debug\net8.0\ref\NivelStocareDate.dll

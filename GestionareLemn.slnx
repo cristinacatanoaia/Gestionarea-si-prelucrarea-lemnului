@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="GestionareLemn/GestionareLemn.csproj" />
+  <Project Path="LibrarieModele/LibrarieModele.csproj" Id="d459b50e-1813-4af0-92d9-3c43003e72b3" />
+  <Project Path="NivelStocareDate/NivelStocareDate.csproj" Id="b54ff647-7317-40ac-9938-063a151d8715" />
+  <Project Path="WPF/WPF.csproj" Id="e1df30e8-1a2b-4cee-89aa-9ad1f574ff4f" />
+</Solution>

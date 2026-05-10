@@ -1,0 +1,147 @@
+﻿<Page x:Class="NivelUIWPF.Pages.WelcomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      Title="Bienvenit" Background="#ECF0F1">
+    <Grid Margin="0">
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <StackPanel Spacing="20" Margin="40">
+                <!-- Main Header -->
+                <Border Background="#2C3E50" CornerRadius="8" Padding="30" Margin="0,0,0,20">
+                    <StackPanel Spacing="10">
+                        <TextBlock Text="🌳 BINE AȚI VENIT 🌳" 
+                                   FontSize="32" FontWeight="Bold" Foreground="White" TextAlignment="Center"/>
+                        <TextBlock Text="Sistem de Gestionare și Prelucrare a Lemnului" 
+                                   FontSize="18" Foreground="#BDC3C7" TextAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Features Section -->
+                <TextBlock Text="FUNCȚIONALITĂȚI PRINCIPALE" FontSize="20" FontWeight="Bold" Foreground="#2C3E50"/>
+
+                <StackPanel Spacing="15">
+                    <!-- Feature 1 -->
+                    <Border Style="{StaticResource CardStyle}">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="📦 Gestionare Lemn Brut" FontSize="16" FontWeight="Bold" Foreground="#3498DB"/>
+                            <TextBlock Text="Vizualizare, adăugare și gestionare informațiilor despre lemn brut din depozite. Clasificare după tip (Molid, Brad, Fag, Stejar, Pin) și cantitate." 
+                                       Foreground="#555555" TextWrapping="Wrap" LineHeight="18"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Feature 2 -->
+                    <Border Style="{StaticResource CardStyle}">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="🔨 Produse Finite din Lemn" FontSize="16" FontWeight="Bold" Foreground="#3498DB"/>
+                            <TextBlock Text="Evidența produselor prelucrate din lemn cu specificații detaliate: tip produs, cantitate și caracteristici (uscat, tratat, lustruit, ignifugat, certificat)." 
+                                       Foreground="#555555" TextWrapping="Wrap" LineHeight="18"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Feature 3 -->
+                    <Border Style="{StaticResource CardStyle}">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="👥 Bază de Date Clienți" FontSize="16" FontWeight="Bold" Foreground="#3498DB"/>
+                            <TextBlock Text="Gestiune completă a informațiilor clienților: nume, telefon, email. Ușor acces la datele de contact pentru comunicare și tranzacții." 
+                                       Foreground="#555555" TextWrapping="Wrap" LineHeight="18"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Feature 4 -->
+                    <Border Style="{StaticResource CardStyle}">
+                        <StackPanel Spacing="8">
+                            <TextBlock Text="⚙️ Evidența Procesării" FontSize="16" FontWeight="Bold" Forecolor="#3498DB"/>
+                            <TextBlock Text="Urmărire completă a proceselor de prelucrare: date, cantități, materiale inițiale și produse rezultate. Rapoarte și statistici detaliate." 
+                                       Foreground="#555555" TextWrapping="Wrap" LineHeight="18"/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- Architecture Section -->
+                <TextBlock Text="ARHITECTURA APLICAȚIEI" FontSize="20" FontWeight="Bold" Foreground="#2C3E50" Margin="0,20,0,0"/>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="12">
+                        <TextBlock Text="Stratificație modernă N-Tier:" FontSize="14" FontWeight="Bold" Foreground="#3498DB"/>
+                        <StackPanel Margin="20,0,0,0" Spacing="8">
+                            <TextBlock Text="• Nivel UI (NivelUIWPF) - Interfață Windows Presentation Foundation" Foreground="#2C3E50"/>
+                            <TextBlock Text="• Nivel Logică Aplicație (GestionareLemn) - Procesarea și validarea datelor" Foreground="#2C3E50"/>
+                            <TextBlock Text="• Nivel Stocare Date (NivelStocareDate) - Persistență și acces la baze de date" Foreground="#2C3E50"/>
+                            <TextBlock Text="• Bibliotecă Modele (LibrarieModele) - Entități și structuri de date comune" Foreground="#2C3E50"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Technologies Section -->
+                <TextBlock Text="TEHNOLOGII UTILIZATE" FontSize="20" FontWeight="Bold" Foreground="#2C3E50" Margin="0,20,0,0"/>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="12">
+                        <StackPanel Orientation="Horizontal" Spacing="40">
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Framework:" FontWeight="Bold" Foreground="#3498DB"/>
+                                <TextBlock Text=".NET 8.0" Foreground="#2C3E50"/>
+                            </StackPanel>
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="UI Framework:" FontWeight="Bold" Foreground="#3498DB"/>
+                                <TextBlock Text="WPF (Windows Presentation Foundation)" Foreground="#2C3E50"/>
+                            </StackPanel>
+                            <StackPanel Spacing="8">
+                                <TextBlock Text="Limbaj:" FontWeight="Bold" Forecolor="#3498DB"/>
+                                <TextBlock Text="C# 12" Foreground="#2C3E50"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Instructions -->
+                <TextBlock Text="INSTRUCȚIUNI DE UTILIZARE" FontSize="20" FontWeight="Bold" Foreground="#2C3E50" Margin="0,20,0,0"/>
+
+                <Border Style="{StaticResource CardStyle}">
+                    <StackPanel Spacing="10">
+                        <StackPanel Spacing="5">
+                            <TextBlock Text="1. Navigare prin module" FontWeight="Bold" Foreground="#3498DB"/>
+                            <TextBlock Text="Utilizați butoanele din meniu superior pentru a naviga între diferite secțiuni: Lemn Brut, Produs Lemn, Clienți, Procesare." 
+                                       Foreground="#555555" TextWrapping="Wrap" Margin="20,0,0,0"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="5">
+                            <TextBlock Text="2. Adăugare date" FontWeight="Bold" Foreground="#3498DB"/>
+                            <TextBlock Text="Completați formularul din secțiunea corespunzătoare și apăsați butonul 'Adăugare'. Datele vor apărea imediat în lista de mai jos." 
+                                       Foreground="#555555" TextWrapping="Wrap" Margin="20,0,0,0"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="5">
+                            <TextBlock Text="3. Vizualizare detalii" FontWeight="Bold" Foreground="#3498DB"/>
+                            <TextBlock Text="Selectați orice articol din lista DataGrid pentru a vedea detaliile complete în secțiunea dedicată." 
+                                       Foreground="#555555" TextWrapping="Wrap" Margin="20,0,0,0"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="5">
+                            <TextBlock Text="4. Ștergere articole" FontWeight="Bold" Foreground="#3498DB"/>
+                            <TextBlock Text="Selectați articolul pe care doriți să-l ștergeți și apăsați butonul 'Ștergere'." 
+                                       Foreground="#555555" TextWrapping="Wrap" Margin="20,0,0,0"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="5">
+                            <TextBlock Text="5. Refresh date" FontWeight="Bold" Foreground="#3498DB"/>
+                            <TextBlock Text="Apăsați butonul 'Refresh' pentru a actualiza afișarea listelor de date." 
+                                       Foreground="#555555" TextWrapping="Wrap" Margin="20,0,0,0"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <!-- Footer -->
+                <Border Background="#2C3E50" CornerRadius="8" Padding="20" Margin="0,40,0,0">
+                    <StackPanel Spacing="5" TextAlignment="Center">
+                        <TextBlock Text="Sistem de Gestionare și Prelucrarea Lemnului" FontSize="14" Foreground="White" FontWeight="Bold"/>
+                        <TextBlock Text="Aplicație WPF Modernă - .NET 8.0" FontSize="12" Foreground="#BDC3C7"/>
+                        <TextBlock Text="©2026 - Toate drepturile rezervate" FontSize="11" Foreground="#7F8C8D" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

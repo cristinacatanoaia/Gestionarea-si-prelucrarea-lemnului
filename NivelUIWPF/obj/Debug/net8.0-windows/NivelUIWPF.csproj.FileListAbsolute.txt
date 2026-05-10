@@ -1,0 +1,5 @@
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelUIWPF\obj\Debug\net8.0-windows\NivelUIWPF.csproj.AssemblyReference.cache
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelUIWPF\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelUIWPF\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelUIWPF\obj\Debug\net8.0-windows\NivelUIWPF_MarkupCompile.cache
+C:\Users\crist\Downloads\Gestionarea-si-prelucrarea-lemnului-main (1)\Gestionarea-si-prelucrarea-lemnului-main\NivelUIWPF\obj\Debug\net8.0-windows\NivelUIWPF_MarkupCompile.lref
