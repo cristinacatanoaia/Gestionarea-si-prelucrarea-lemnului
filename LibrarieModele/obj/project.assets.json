@@ -13,11 +13,19 @@
   "project": {
     "version": "1.0.0",
     "restore": {
+<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\crist\\Downloads\\Gestionarea-si-prelucrarea-lemnului-main (1)\\Gestionarea-si-prelucrarea-lemnului-main\\LibrarieModele\\LibrarieModele.csproj",
       "projectName": "LibrarieModele",
       "projectPath": "C:\\Users\\crist\\Downloads\\Gestionarea-si-prelucrarea-lemnului-main (1)\\Gestionarea-si-prelucrarea-lemnului-main\\LibrarieModele\\LibrarieModele.csproj",
       "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\crist\\Downloads\\Gestionarea-si-prelucrarea-lemnului-main (1)\\Gestionarea-si-prelucrarea-lemnului-main\\LibrarieModele\\obj\\",
+=======
+      "projectUniqueName": "C:\\Users\\crist\\source\\repos\\AplicatiePiu\\GestionareLemn\\LibrarieModele\\LibrarieModele.csproj",
+      "projectName": "LibrarieModele",
+      "projectPath": "C:\\Users\\crist\\source\\repos\\AplicatiePiu\\GestionareLemn\\LibrarieModele\\LibrarieModele.csproj",
+      "packagesPath": "C:\\Users\\crist\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\crist\\source\\repos\\AplicatiePiu\\GestionareLemn\\LibrarieModele\\obj\\",
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\crist\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -32,7 +40,10 @@
       },
       "frameworks": {
         "net8.0": {
+<<<<<<< HEAD
           "framework": "net8.0",
+=======
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
           "targetAlias": "net8.0",
           "projectReferences": {}
         }
@@ -51,7 +62,10 @@
     },
     "frameworks": {
       "net8.0": {
+<<<<<<< HEAD
         "framework": "net8.0",
+=======
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
         "targetAlias": "net8.0",
         "imports": [
           "net461",
@@ -67,6 +81,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Ref",
+<<<<<<< HEAD
             "version": "[8.0.26, 8.0.26]"
           },
           {
@@ -76,6 +91,17 @@
           {
             "name": "Microsoft.WindowsDesktop.App.Ref",
             "version": "[8.0.26, 8.0.26]"
+=======
+            "version": "[8.0.25, 8.0.25]"
+          },
+          {
+            "name": "Microsoft.NETCore.App.Ref",
+            "version": "[8.0.25, 8.0.25]"
+          },
+          {
+            "name": "Microsoft.WindowsDesktop.App.Ref",
+            "version": "[8.0.25, 8.0.25]"
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
           }
         ],
         "frameworkReferences": {
@@ -83,7 +109,11 @@
             "privateAssets": "all"
           }
         },
+<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.202/PortableRuntimeIdentifierGraph.json"
+=======
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.201/PortableRuntimeIdentifierGraph.json"
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
       }
     }
   }

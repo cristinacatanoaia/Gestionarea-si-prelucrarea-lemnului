@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "abiEedg7GEc=",
   "success": true,
   "projectFilePath": "C:\\Users\\crist\\Downloads\\Gestionarea-si-prelucrarea-lemnului-main (1)\\Gestionarea-si-prelucrarea-lemnului-main\\LibrarieModele\\LibrarieModele.csproj",
@@ -7,6 +8,15 @@
     "C:\\Users\\crist\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.26\\microsoft.windowsdesktop.app.ref.8.0.26.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.26\\microsoft.netcore.app.ref.8.0.26.nupkg.sha512",
     "C:\\Users\\crist\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.26\\microsoft.aspnetcore.app.ref.8.0.26.nupkg.sha512"
+=======
+  "dgSpecHash": "xKAeu3qGV54=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\crist\\source\\repos\\AplicatiePiu\\GestionareLemn\\LibrarieModele\\LibrarieModele.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\crist\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.25\\microsoft.windowsdesktop.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.25\\microsoft.netcore.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\crist\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.25\\microsoft.aspnetcore.app.ref.8.0.25.nupkg.sha512"
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
   ],
   "logs": []
 }

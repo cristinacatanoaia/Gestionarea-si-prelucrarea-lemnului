@@ -1,4 +1,5 @@
 ﻿using System;
+<<<<<<< HEAD
 using System.Collections.Generic;
 using System.Linq;
 using LibrarieModele;
@@ -12,13 +13,25 @@ class Program
 	private static List<ProdusLemn> produse = new List<ProdusLemn>();
 	private static List<Procesare> procesari = new List<Procesare>();
 	private static List<Vanzare> vanzari = new List<Vanzare>();
+=======
+using System.ComponentModel;
+using System.Security.Claims;
+using LibrarieModele;
+class Program
+{
+	static Gestiune gestiune = new Gestiune();
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 
 	static void Main(string[] args)
 	{
 		Console.OutputEncoding = System.Text.Encoding.UTF8;
+<<<<<<< HEAD
 		stocareClienti = StocareFactory.GetStocareClienti();
 		stocareLemn = StocareFactory.GetStocareLemnBrut();
 		AdaugaDateInitiale();
+=======
+		gestiune.AdaugaDateInitiale();
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 
 		bool continua = true;
 		while (continua)
@@ -28,6 +41,7 @@ class Program
 
 			switch (optiune)
 			{
+<<<<<<< HEAD
 				case "1": AdaugaClient(); break;
 				case "2": AfiseazaClienti(); break;
 				case "3": CautaClientDupaNume(); break;
@@ -45,13 +59,46 @@ class Program
 				case "0": continua = false; break;
 				default: Console.WriteLine("Optiune invalida! Incearca din nou."); break;
 			}
+=======
+			
+				case "1": gestiune.AdaugaClient(); break;
+				case "2": gestiune.AfiseazaClienti(); break;
+				case "3": gestiune.CautaClientDupaNume(); break;
+				case "4": gestiune.AdaugaLemnBrut(); break;
+				case "5": gestiune.AfiseazaStocLemn(); break;
+				case "6": gestiune.CautaLemnDupaTip(); break;
+				case "7": gestiune.AdaugaProcesare(); break;
+				case "8": gestiune.AfiseazaProcesari(); break;
+				case "9": gestiune.AfiseazaProduse(); break;
+				case "10": gestiune.CautaProdusDupaTip(); break;
+				case "11": gestiune.AdaugaVanzare(); break;
+				case "12": gestiune.AfiseazaVanzari(); break;
+				case "13": gestiune.CautaVanzariDupaClient(); break;
+				case "14": gestiune.CautaVanzariDupaProdus(); break;
+
+				case "0":
+					continua = false;
+					break;
+				default:
+					Console.WriteLine("Optiune invalida! Incearca din nou.");
+					break;
+			}
+
+	
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 		}
 	}
 
 	static void AfiseazaMeniu()
 	{
 		Console.Clear();
+<<<<<<< HEAD
 		Console.WriteLine("  GESTIONAREA PRELUCRARII LEMNULUI     ");
+=======
+		
+		Console.WriteLine("  GESTIONAREA PRELUCRARII LEMNULUI     ");
+
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 		Console.WriteLine("  --- CLIENTI --- ");
 		Console.WriteLine(" 1.  Adauga client ");
 		Console.WriteLine(" 2.  Afiseaza toti clientii");
@@ -74,6 +121,7 @@ class Program
 		Console.WriteLine(" 0.  Iesire ");
 		Console.Write("Alege optiunea: ");
 	}
+<<<<<<< HEAD
 
 	// ========== CLIENTI ==========
 	static void AdaugaClient()
@@ -487,4 +535,6 @@ class Program
 			stocareLemn.AddLemnBrut(new LemnBrut { Id = 2, TipLemn = TipLemnEnum.Fag, CantitateMc = 80.0 });
 		}
 	}
+=======
+>>>>>>> badc449b322548801e74cb4072af652e0ee34f6a
 }
