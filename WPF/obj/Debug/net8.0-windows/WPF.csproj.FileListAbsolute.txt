@@ -33,3 +33,4 @@ C:\Proiect_PIU_copie\Gestionarea_lemnului_copie\WPF\obj\Debug\net8.0-windows\ref
 C:\Proiect_PIU_copie\Gestionarea_lemnului_copie\WPF\obj\Debug\net8.0-windows\WPF.pdb
 C:\Proiect_PIU_copie\Gestionarea_lemnului_copie\WPF\obj\Debug\net8.0-windows\WPF.genruntimeconfig.cache
 C:\Proiect_PIU_copie\Gestionarea_lemnului_copie\WPF\obj\Debug\net8.0-windows\ref\WPF.dll
+C:\Proiect_PIU_copie\Gestionarea_lemnului_copie\WPF\obj\Debug\net8.0-windows\WPF.sourcelink.json

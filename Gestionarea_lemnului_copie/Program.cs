@@ -6,7 +6,7 @@ namespace Gestionarea_lemnului_copie
 {
 	class Program
 	{
-		// Stocare in memorie pentru procesari, produse si vanzari
+		// Stocare in memorie
 		private static List<Procesare> procesari = new List<Procesare>();
 		private static List<ProdusLemn> produse = new List<ProdusLemn>();
 		private static List<Vanzare> vanzari = new List<Vanzare>();
@@ -88,7 +88,7 @@ namespace Gestionarea_lemnului_copie
 			} while (optiune != "0");
 		}
 
-		// ── MENIU ──────────────────────────────────────────────────────────────
+
 
 		public static void AfiseazaMeniu()
 		{
@@ -117,7 +117,7 @@ namespace Gestionarea_lemnului_copie
 			Console.Write("Alege optiunea: ");
 		}
 
-		// ── CLIENTI ────────────────────────────────────────────────────────────
+		//clienti
 
 		public static void AdaugaClient(IStocareClienti stocareClienti)
 		{
@@ -189,7 +189,7 @@ namespace Gestionarea_lemnului_copie
 				Console.WriteLine("Niciun client gasit cu acest nume.");
 		}
 
-		// ── LEMN BRUT ──────────────────────────────────────────────────────────
+		//lemn brut
 
 		public static void AdaugaLemnBrut(IStocareLemnBrut stocareLemn)
 		{
@@ -268,7 +268,7 @@ namespace Gestionarea_lemnului_copie
 				Console.WriteLine("Niciun lemn gasit cu acest tip.");
 		}
 
-		// ── PROCESARE ──────────────────────────────────────────────────────────
+		//procesare
 
 		public static void AdaugaProcesare(IStocareLemnBrut stocareLemn)
 		{
@@ -367,7 +367,7 @@ namespace Gestionarea_lemnului_copie
 			Console.WriteLine("Total: " + procesari.Count + " procesari");
 		}
 
-		// ── PRODUSE ────────────────────────────────────────────────────────────
+		//produse
 
 		public static void AfiseazaProduse()
 		{
@@ -403,7 +403,7 @@ namespace Gestionarea_lemnului_copie
 				Console.WriteLine("Niciun produs gasit cu acest tip.");
 		}
 
-		// ── VANZARI ────────────────────────────────────────────────────────────
+		// vanzari
 
 		public static void AdaugaVanzare(IStocareClienti stocareClienti)
 		{
@@ -529,7 +529,7 @@ namespace Gestionarea_lemnului_copie
 				Console.WriteLine("Nu au fost gasite vanzari pentru acest produs.");
 		}
 
-		// ── DATE INITIALE ──────────────────────────────────────────────────────
+		
 
 		public static void AdaugaDateInitiale(IStocareClienti stocareClienti, IStocareLemnBrut stocareLemn)
 		{

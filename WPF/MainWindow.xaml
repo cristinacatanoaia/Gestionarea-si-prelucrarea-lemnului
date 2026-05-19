@@ -1,47 +1,128 @@
 ﻿<Window x:Class="WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Gestionare Clienti" Height="500" Width="600"
+        Title="Gestionare Lemn" Height="600" Width="900"
         WindowStartupLocation="CenterScreen">
 
-	<StackPanel Margin="20">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="180"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
 
-		<!-- Titlu -->
-		<TextBlock Text="Gestionare Clienti" FontSize="20" FontWeight="Bold"
-                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
+		<!-- MENIU LATERAL -->
+		<StackPanel Grid.Column="0" Background="#2C3E2D">
 
-		<!-- Campuri pe verticala -->
-		<TextBlock Text="Nume:"/>
-		<TextBox x:Name="txtNume" Margin="0,0,0,10"/>
+			<TextBlock Text="Gestionare Lemn"
+                       Foreground="White" FontSize="14" FontWeight="Bold"
+                       TextWrapping="Wrap"
+                       Margin="15,20,15,30"/>
 
-		<TextBlock Text="Telefon:"/>
-		<TextBox x:Name="txtTelefon" Margin="0,0,0,10"/>
+			<Button Content="Clienti"
+                    Background="Transparent" Foreground="White"
+                    BorderThickness="1" Height="45"
+                    HorizontalContentAlignment="Left" Padding="15,0"
+                    FontSize="13" Cursor="Hand"
+                    Click="btnMenuClienti_Click"/>
 
-		<TextBlock Text="Email:"/>
-		<TextBox x:Name="txtEmail" Margin="0,0,0,10"/>
+			<Button Content="Lemn Brut"
+                    Background="#2C3E2D" Foreground="White"
+                    BorderThickness="1" Height="45"
+                    HorizontalContentAlignment="Left" Padding="15,0"
+                    FontSize="13" Cursor="Hand"
+                    Click="btnMenuLemnBrut_Click"/>
 
-		<!-- Mesaj eroare/succes -->
-		<TextBlock x:Name="txtMesaj" Foreground="Red" Margin="0,0,0,10"/>
-
-		<!-- Butoane pe orizontala -->
-		<StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-			<Button Content="Adauga" Width="100" Margin="0,0,10,0" Click="btnAdauga_Click"/>
-			<Button Content="Afiseaza" Width="100" Click="btnAfiseaza_Click"/>
 		</StackPanel>
 
-		<!-- DataGrid -->
-		<DataGrid x:Name="dgClienti"
-                  AutoGenerateColumns="False"
-                  IsReadOnly="True"
-                  CanUserAddRows="False"
-                  Height="200">
-			<DataGrid.Columns>
-				<DataGridTextColumn Header="ID"      Binding="{Binding Id}"      Width="50"/>
-				<DataGridTextColumn Header="Nume"    Binding="{Binding Nume}"    Width="*"/>
-				<DataGridTextColumn Header="Telefon" Binding="{Binding Telefon}" Width="120"/>
-				<DataGridTextColumn Header="Email"   Binding="{Binding Email}"   Width="180"/>
-			</DataGrid.Columns>
-		</DataGrid>
+		
+		<Grid Grid.Column="1" Background="#F4F1EC">
 
-	</StackPanel>
+			<!-- PANOUL CLIENTI -->
+			<StackPanel x:Name="panelClienti" Margin="30" Visibility="Visible">
+
+				<TextBlock Text="Gestionare Clienti"
+                           FontSize="20" FontWeight="Bold"
+                           Foreground="#2C3E2D" Margin="0,0,0,20"/>
+
+				<TextBlock x:Name="lblNume" Text="Nume:" Foreground="#333"/>
+				<TextBox x:Name="txtNume" Margin="0,4,0,10" Padding="6"/>
+
+				<TextBlock x:Name="lblTelefon" Text="Telefon:" Foreground="#333"/>
+				<TextBox x:Name="txtTelefon" Margin="0,4,0,10" Padding="6"/>
+
+				<TextBlock x:Name="lblEmail" Text="Email:" Foreground="#333"/>
+				<TextBox x:Name="txtEmail" Margin="0,4,0,10" Padding="6"/>
+
+				<TextBlock x:Name="txtMesajClient" Margin="0,0,0,10"/>
+
+				<StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+					<Button Content="Adauga" Width="100" Height="35"
+                            Background="#2C3E2D" Foreground="White"
+                            BorderThickness="0" Cursor="Hand"
+                            Click="btnAdaugaClient_Click"/>
+					<Button Content="Afiseaza" Width="100" Height="35"
+                            Background="#8FBC5A" Foreground="White"
+                            BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+                            Click="btnAfiseazaClienti_Click"/>
+				</StackPanel>
+
+				<DataGrid x:Name="dgClienti"
+                          AutoGenerateColumns="False" IsReadOnly="True"
+                          CanUserAddRows="False" Height="220">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="ID"      Binding="{Binding Id}"      Width="50"/>
+						<DataGridTextColumn Header="Nume"    Binding="{Binding Nume}"    Width="*"/>
+						<DataGridTextColumn Header="Telefon" Binding="{Binding Telefon}" Width="120"/>
+						<DataGridTextColumn Header="Email"   Binding="{Binding Email}"   Width="180"/>
+					</DataGrid.Columns>
+				</DataGrid>
+
+			</StackPanel>
+
+			<!-- PANOUL LEMN BRUT -->
+			<StackPanel x:Name="panelLemnBrut" Margin="30" Visibility="Collapsed">
+
+				<TextBlock Text="Gestionare Lemn Brut"
+                           FontSize="20" FontWeight="Bold"
+                           Foreground="#2C3E2D" Margin="0,0,0,20"/>
+
+				<TextBlock x:Name="lblTipLemn" Text="Tip Lemn:" Foreground="#333"/>
+				<ComboBox x:Name="cmbTipLemn" Margin="0,4,0,10" Padding="6" SelectedIndex="0">
+					<ComboBoxItem Content="Molid"/>
+					<ComboBoxItem Content="Brad"/>
+					<ComboBoxItem Content="Fag"/>
+					<ComboBoxItem Content="Stejar"/>
+					<ComboBoxItem Content="Pin"/>
+				</ComboBox>
+
+				<TextBlock x:Name="lblCantitate" Text="Cantitate (mc):" Foreground="#333"/>
+				<TextBox x:Name="txtCantitate" Margin="0,4,0,10" Padding="6"/>
+
+				<TextBlock x:Name="txtMesajLemn" Margin="0,0,0,10"/>
+
+				<StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+					<Button Content="Adauga" Width="100" Height="35"
+                            Background="#2C3E2D" Foreground="White"
+                            BorderThickness="0" Cursor="Hand"
+                            Click="btnAdaugaLemn_Click"/>
+					<Button Content="Afiseaza" Width="100" Height="35"
+                            Background="#8FBC5A" Foreground="White"
+                            BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+                            Click="btnAfiseazaLemn_Click"/>
+				</StackPanel>
+
+				<DataGrid x:Name="dgLemnBrut"
+                          AutoGenerateColumns="False" IsReadOnly="True"
+                          CanUserAddRows="False" Height="220">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="ID"             Binding="{Binding Id}"          Width="50"/>
+						<DataGridTextColumn Header="Tip Lemn"       Binding="{Binding TipLemn}"     Width="*"/>
+						<DataGridTextColumn Header="Cantitate (mc)" Binding="{Binding CantitateMc}" Width="140"/>
+					</DataGrid.Columns>
+				</DataGrid>
+
+			</StackPanel>
+
+		</Grid>
+	</Grid>
 </Window>
