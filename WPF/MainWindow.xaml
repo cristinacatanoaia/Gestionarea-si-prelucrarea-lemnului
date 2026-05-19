@@ -1,0 +1,47 @@
+﻿<Window x:Class="WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Gestionare Clienti" Height="500" Width="600"
+        WindowStartupLocation="CenterScreen">
+
+	<StackPanel Margin="20">
+
+		<!-- Titlu -->
+		<TextBlock Text="Gestionare Clienti" FontSize="20" FontWeight="Bold"
+                   HorizontalAlignment="Center" Margin="0,0,0,20"/>
+
+		<!-- Campuri pe verticala -->
+		<TextBlock Text="Nume:"/>
+		<TextBox x:Name="txtNume" Margin="0,0,0,10"/>
+
+		<TextBlock Text="Telefon:"/>
+		<TextBox x:Name="txtTelefon" Margin="0,0,0,10"/>
+
+		<TextBlock Text="Email:"/>
+		<TextBox x:Name="txtEmail" Margin="0,0,0,10"/>
+
+		<!-- Mesaj eroare/succes -->
+		<TextBlock x:Name="txtMesaj" Foreground="Red" Margin="0,0,0,10"/>
+
+		<!-- Butoane pe orizontala -->
+		<StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+			<Button Content="Adauga" Width="100" Margin="0,0,10,0" Click="btnAdauga_Click"/>
+			<Button Content="Afiseaza" Width="100" Click="btnAfiseaza_Click"/>
+		</StackPanel>
+
+		<!-- DataGrid -->
+		<DataGrid x:Name="dgClienti"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  CanUserAddRows="False"
+                  Height="200">
+			<DataGrid.Columns>
+				<DataGridTextColumn Header="ID"      Binding="{Binding Id}"      Width="50"/>
+				<DataGridTextColumn Header="Nume"    Binding="{Binding Nume}"    Width="*"/>
+				<DataGridTextColumn Header="Telefon" Binding="{Binding Telefon}" Width="120"/>
+				<DataGridTextColumn Header="Email"   Binding="{Binding Email}"   Width="180"/>
+			</DataGrid.Columns>
+		</DataGrid>
+
+	</StackPanel>
+</Window>

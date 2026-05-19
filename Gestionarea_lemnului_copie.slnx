@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="Gestionarea_lemnului_copie/Gestionarea_lemnului_copie.csproj" />
+  <Project Path="LibrarieModele/LibrarieModele.csproj" />
+  <Project Path="NivelStocareDate/NivelStocareDate.csproj" />
+  <Project Path="WPF/WPF.csproj" />
+</Solution>
