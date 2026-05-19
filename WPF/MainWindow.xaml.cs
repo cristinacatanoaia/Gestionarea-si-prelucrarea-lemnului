@@ -216,6 +216,15 @@ namespace WPF
 			lblCantitate.Foreground = Brushes.Black;
 			txtMesajLemn.Text = string.Empty;
 
+			// Validare ListBox (selectare tip lemn)
+			if (lstTipLemn.SelectedIndex == -1)
+			{
+				lblTipLemn.Foreground = Brushes.Red;
+				txtMesajLemn.Foreground = Brushes.Red;
+				txtMesajLemn.Text = "Selectati tipul de lemn din ListBox!";
+				return;
+			}
+
 			string cantitateText = txtCantitate.Text.Trim();
 
 			// Validare Cantitate
@@ -248,17 +257,18 @@ namespace WPF
 				return;
 			}
 
-			// Adaugare lemn brut
+			// Adaugare lemn brut (folosind valoarea din ListBox)
 			LemnBrut lemnNou = new LemnBrut
 			{
-				TipLemn = (TipLemnEnum)cmbTipLemn.SelectedIndex,
+				TipLemn = (TipLemnEnum)lstTipLemn.SelectedIndex,
 				CantitateMc = cantitate
 			};
 			stocareLemn.AddLemnBrut(lemnNou);
 
 			txtCantitate.Text = string.Empty;
+			lstTipLemn.SelectedIndex = -1;
 			txtMesajLemn.Foreground = Brushes.Green;
-			txtMesajLemn.Text = "Lemn brut adaugat cu succes!";
+			txtMesajLemn.Text = $"Lemn brut adaugat cu succes! Tip: {lemnNou.TipLemn}, Cantitate: {cantitate} mc";
 		}
 
 		private void btnAfiseazaLemn_Click(object sender, RoutedEventArgs e)
@@ -418,6 +428,7 @@ namespace WPF
 			Client client = cmbClientVanzare.SelectedItem as Client;
 			string produs = cmbProdusVanzare.SelectedItem as string ?? string.Empty;
 			string cantitateText = txtCantVanzare.Text.Trim();
+			DateTime dataVanzare = dtpDataVanzare.SelectedDate ?? DateTime.Today;
 
 			// Validare client
 			if (client == null)
@@ -485,12 +496,12 @@ namespace WPF
 				Client = client,
 				Produs = new ProdusLemn { TipProdus = produs, Cantitate = cantitate, Caracteristici = CaracteristiciProdus.Niciuna },
 				Cantitate = cantitate,
-				Data = DateTime.Now
+				Data = dataVanzare
 			};
 			vanzari.Add(vanzareNoua);
 
 			txtMesajVanzare.Foreground = Brushes.Green;
-			txtMesajVanzare.Text = $"Vanzare adaugata! Client: {client.Nume}, Produs: {produs}, Cantitate: {cantitate} mc";
+			txtMesajVanzare.Text = $"Vanzare adaugata! Data: {dataVanzare:dd/MM/yyyy}, Client: {client.Nume}, Produs: {produs}, Cantitate: {cantitate} mc";
 
 			RefreshProduseVanzareDisponibile();
 			ResetareVanzare();
@@ -501,6 +512,7 @@ namespace WPF
 			cmbClientVanzare.SelectedItem = null;
 			cmbProdusVanzare.SelectedIndex = 0;
 			txtCantVanzare.Text = string.Empty;
+			dtpDataVanzare.SelectedDate = DateTime.Today;
 		}
 
 		private void btnAfiseazaVanzari_Click(object sender, RoutedEventArgs e)
@@ -515,6 +527,130 @@ namespace WPF
 			dgProcesari.ItemsSource = procesari.ToList();
 		}
 
+		// ========== MODIFICA CLIENTI ==========
+		private void btnMenuModificaClienti_Click(object sender, RoutedEventArgs e)
+		{
+			AscundeToatePanourile();
+			panelModificaClienti.Visibility = Visibility.Visible;
+			RefreshClientiModifica();
+		}
+
+		private void RefreshClientiModifica()
+		{
+			cmbClientModifica.ItemsSource = null;
+			cmbClientModifica.ItemsSource = stocareClienti.GetClienti().ToList();
+			cmbClientModifica.SelectedIndex = -1;
+			AnuleazaModificareClient();
+		}
+
+		private void cmbClientModifica_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+		{
+			Client clientSelectat = cmbClientModifica.SelectedItem as Client;
+			if (clientSelectat != null)
+			{
+				txtNumeModifica.Text = clientSelectat.Nume;
+				txtTelefonModifica.Text = clientSelectat.Telefon;
+				txtEmailModifica.Text = clientSelectat.Email;
+				dtpDataActualizare.SelectedDate = DateTime.Today;
+				txtMesajModifica.Text = string.Empty;
+			}
+			else
+			{
+				AnuleazaModificareClient();
+			}
+		}
+
+		private void btnSalveazaModificareClient_Click(object sender, RoutedEventArgs e)
+		{
+			Client clientSelectat = cmbClientModifica.SelectedItem as Client;
+			if (clientSelectat == null)
+			{
+				txtMesajModifica.Foreground = Brushes.Red;
+				txtMesajModifica.Text = "Selectati un client!";
+				return;
+			}
+
+			string nume = txtNumeModifica.Text.Trim();
+			string telefon = txtTelefonModifica.Text.Trim();
+			string email = txtEmailModifica.Text.Trim();
+
+			// Validare
+			if (string.IsNullOrEmpty(nume))
+			{
+				txtMesajModifica.Foreground = Brushes.Red;
+				txtMesajModifica.Text = "Introduceti numele!";
+				return;
+			}
+
+			if (string.IsNullOrEmpty(telefon))
+			{
+				txtMesajModifica.Foreground = Brushes.Red;
+				txtMesajModifica.Text = "Introduceti telefonul!";
+				return;
+			}
+			if (telefon.Length != LUNGIME_TELEFON)
+			{
+				txtMesajModifica.Foreground = Brushes.Red;
+				txtMesajModifica.Text = $"Telefonul trebuie sa aiba exact {LUNGIME_TELEFON} cifre!";
+				return;
+			}
+			foreach (char c in telefon)
+			{
+				if (!char.IsDigit(c))
+				{
+					txtMesajModifica.Foreground = Brushes.Red;
+					txtMesajModifica.Text = "Telefonul trebuie sa contina doar cifre!";
+					return;
+				}
+			}
+
+			if (string.IsNullOrEmpty(email))
+			{
+				txtMesajModifica.Foreground = Brushes.Red;
+				txtMesajModifica.Text = "Introduceti emailul!";
+				return;
+			}
+			if (!email.Contains("@") || !email.Contains("."))
+			{
+				txtMesajModifica.Foreground = Brushes.Red;
+				txtMesajModifica.Text = "Emailul nu este valid! (ex: nume@domeniu.ro)";
+				return;
+			}
+
+			// Actualizare client
+			clientSelectat.Nume = nume;
+			clientSelectat.Telefon = telefon;
+			clientSelectat.Email = email;
+			stocareClienti.UpdateClient(clientSelectat);
+			RefreshClientiModifica();
+
+			txtMesajModifica.Foreground = Brushes.Green;
+			txtMesajModifica.Text = "Client actualizat cu succes!";
+		}
+
+		private void btnAnuleazaModificareClient_Click(object sender, RoutedEventArgs e)
+		{
+			AnuleazaModificareClient();
+		}
+
+		private void AnuleazaModificareClient()
+		{
+			cmbClientModifica.SelectedIndex = -1;
+			txtNumeModifica.Text = string.Empty;
+			txtTelefonModifica.Text = string.Empty;
+			txtEmailModifica.Text = string.Empty;
+			dtpDataActualizare.SelectedDate = DateTime.Today;
+			txtMesajModifica.Text = string.Empty;
+		}
+
+		// ========== INTEGRATIONS: ListBox (LemnBrut) & DatePicker (Vanzare) ==========
+		private void btnAdaugaLemn_Click_UpdateListBox(object sender, RoutedEventArgs e)
+		{
+			// ListBox automatically displays items from XAML ListBoxItems
+			// To extract selected value: 
+			// var selected = lstTipLemn.SelectedItem as ListBoxItem;
+			// string tipLemn = selected?.Content.ToString();
+		}
 		
 	}
 }

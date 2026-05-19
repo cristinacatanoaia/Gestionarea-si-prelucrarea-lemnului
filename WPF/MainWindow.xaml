@@ -1,4 +1,4 @@
-﻿<Window x:Class="WPF.MainWindow"
+<Window x:Class="WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Gestionare Lemn" Height="600" Width="900"
@@ -25,6 +25,13 @@
                     HorizontalContentAlignment="Left" Padding="15,0"
                     FontSize="13" Cursor="Hand"
                     Click="btnMenuClienti_Click"/>
+
+			<Button Content="Modifica Clienti"
+                    Background="Transparent" Foreground="White"
+                    BorderThickness="1" Height="45"
+                    HorizontalContentAlignment="Left" Padding="15,0"
+                    FontSize="13" Cursor="Hand"
+                    Click="btnMenuModificaClienti_Click"/>
 
 			<Button Content="Lemn Brut"
                     Background="#2C3E2D" Foreground="White"
@@ -127,14 +134,14 @@
                            FontSize="20" FontWeight="Bold"
                            Foreground="#2C3E2D" Margin="0,0,0,20"/>
 
-				<TextBlock x:Name="lblTipLemn" Text="Tip Lemn:" Foreground="#333"/>
-				<ComboBox x:Name="cmbTipLemn" Margin="0,4,0,10" Padding="6" SelectedIndex="0">
-					<ComboBoxItem Content="Molid"/>
-					<ComboBoxItem Content="Brad"/>
-					<ComboBoxItem Content="Fag"/>
-					<ComboBoxItem Content="Stejar"/>
-					<ComboBoxItem Content="Pin"/>
-				</ComboBox>
+				<TextBlock x:Name="lblTipLemn" Text="Tip Lemn (ListBox):" Foreground="#333"/>
+				<ListBox x:Name="lstTipLemn" Margin="0,4,0,10" Padding="6" Height="100" SelectionMode="Single">
+					<ListBoxItem>Molid</ListBoxItem>
+					<ListBoxItem>Brad</ListBoxItem>
+					<ListBoxItem>Fag</ListBoxItem>
+					<ListBoxItem>Stejar</ListBoxItem>
+					<ListBoxItem>Pin</ListBoxItem>
+				</ListBox>
 
 				<TextBlock x:Name="lblCantitate" Text="Cantitate (mc):" Foreground="#333"/>
 				<TextBox x:Name="txtCantitate" Margin="0,4,0,10" Padding="6"/>
@@ -231,6 +238,9 @@
 				<TextBlock Text="Vanzare" FontSize="20" FontWeight="Bold"
                Foreground="#2C3E2D" Margin="0,0,0,20"/>
 
+				<TextBlock x:Name="lblDataVanzare" Text="Data vanzare (DatePicker):" Foreground="#333"/>
+				<DatePicker x:Name="dtpDataVanzare" Margin="0,4,0,10" SelectedDateFormat="Short"/>
+
 				<TextBlock x:Name="lblClientVanzare" Text="Nume client:" Foreground="#333"/>
 				<ComboBox x:Name="cmbClientVanzare" Margin="0,4,0,10" Padding="6" DisplayMemberPath="Nume"/>
 
@@ -265,6 +275,44 @@
 						<DataGridTextColumn Header="Cantitate" Binding="{Binding Cantitate}" Width="90"/>
 					</DataGrid.Columns>
 				</DataGrid>
+!-- PANOUL MODIFICA CLIENTI -->
+			<StackPanel x:Name="panelModificaClienti" Margin="30" Visibility="Collapsed">
+
+				<TextBlock Text="Modifica Clienti"
+                           FontSize="20" FontWeight="Bold"
+                           Foreground="#2C3E2D" Margin="0,0,0,20"/>
+
+				<TextBlock Text="Selecteaza client:" Foreground="#333"/>
+				<ComboBox x:Name="cmbClientModifica" Margin="0,4,0,10" Padding="6" 
+						  DisplayMemberPath="Nume" SelectionChanged="cmbClientModifica_SelectionChanged"/>
+
+				<TextBlock x:Name="lblNumeModifica" Text="Nume:" Foreground="#333"/>
+				<TextBox x:Name="txtNumeModifica" Padding="6" Width="659" Margin="0,4,0,10"/>
+
+				<TextBlock x:Name="lblTelefonModifica" Text="Telefon:" Foreground="#333"/>
+				<TextBox x:Name="txtTelefonModifica" Margin="0,4,0,10" Padding="6"/>
+
+				<TextBlock x:Name="lblEmailModifica" Text="Email:" Foreground="#333"/>
+				<TextBox x:Name="txtEmailModifica" Margin="0,4,0,10" Padding="6"/>
+
+				<TextBlock x:Name="lblDataActualizare" Text="Data actualizare (DatePicker):" Foreground="#333"/>
+				<DatePicker x:Name="dtpDataActualizare" Margin="0,4,0,10" SelectedDateFormat="Short" IsEnabled="False"/>
+
+				<TextBlock x:Name="txtMesajModifica" Margin="0,0,0,10" Foreground="#333"/>
+
+				<StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+					<Button Content="Salveaza" Width="100" Height="35"
+							Background="#2C3E2D" Foreground="White"
+							BorderThickness="0" Cursor="Hand"
+							Click="btnSalveazaModificareClient_Click"/>
+					<Button Content="Anuleaza" Width="100" Height="35"
+							Background="#8FBC5A" Foreground="White"
+							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+							Click="btnAnuleazaModificareClient_Click"/>
+				</StackPanel>
+
+			</StackPanel>
+
 
 			</StackPanel>
 
