@@ -1,0 +1,3 @@
+1;Brad;0
+2;Stejar;0
+3;Brad;7

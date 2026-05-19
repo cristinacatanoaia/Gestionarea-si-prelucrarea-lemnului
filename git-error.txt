@@ -1,0 +1,85 @@
+﻿On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   Gestionarea_lemnului_copie/bin/Debug/net8.0/Gestionarea_lemnului_copie.dll
+	modified:   Gestionarea_lemnului_copie/bin/Debug/net8.0/Gestionarea_lemnului_copie.exe
+	modified:   Gestionarea_lemnului_copie/bin/Debug/net8.0/Gestionarea_lemnului_copie.pdb
+	modified:   Gestionarea_lemnului_copie/bin/Debug/net8.0/LibrarieModele.dll
+	modified:   Gestionarea_lemnului_copie/bin/Debug/net8.0/LibrarieModele.pdb
+	modified:   Gestionarea_lemnului_copie/bin/Debug/net8.0/NivelStocareDate.dll
+	modified:   Gestionarea_lemnului_copie/bin/Debug/net8.0/NivelStocareDate.pdb
+	modified:   Gestionarea_lemnului_copie/obj/Debug/net8.0/Gestionarea_lemnului_copie.AssemblyInfo.cs
+	modified:   Gestionarea_lemnului_copie/obj/Debug/net8.0/Gestionarea_lemnului_copie.AssemblyInfoInputs.cache
+	modified:   Gestionarea_lemnului_copie/obj/Debug/net8.0/Gestionarea_lemnului_copie.csproj.AssemblyReference.cache
+	modified:   Gestionarea_lemnului_copie/obj/Debug/net8.0/Gestionarea_lemnului_copie.csproj.FileListAbsolute.txt
+	modified:   Gestionarea_lemnului_copie/obj/Debug/net8.0/Gestionarea_lemnului_copie.dll
+	modified:   Gestionarea_lemnului_copie/obj/Debug/net8.0/Gestionarea_lemnului_copie.pdb
+	modified:   Gestionarea_lemnului_copie/obj/Debug/net8.0/apphost.exe
+	modified:   Gestionarea_lemnului_copie/obj/Debug/net8.0/ref/Gestionarea_lemnului_copie.dll
+	modified:   Gestionarea_lemnului_copie/obj/Debug/net8.0/refint/Gestionarea_lemnului_copie.dll
+	modified:   LibrarieModele/bin/Debug/net8.0/LibrarieModele.dll
+	modified:   LibrarieModele/bin/Debug/net8.0/LibrarieModele.pdb
+	modified:   LibrarieModele/obj/Debug/net8.0/LibrarieModele.AssemblyInfo.cs
+	modified:   LibrarieModele/obj/Debug/net8.0/LibrarieModele.AssemblyInfoInputs.cache
+	modified:   LibrarieModele/obj/Debug/net8.0/LibrarieModele.csproj.FileListAbsolute.txt
+	modified:   LibrarieModele/obj/Debug/net8.0/LibrarieModele.dll
+	modified:   LibrarieModele/obj/Debug/net8.0/LibrarieModele.pdb
+	modified:   LibrarieModele/obj/Debug/net8.0/ref/LibrarieModele.dll
+	modified:   LibrarieModele/obj/Debug/net8.0/refint/LibrarieModele.dll
+	modified:   NivelStocareDate/bin/Debug/net8.0/LibrarieModele.dll
+	modified:   NivelStocareDate/bin/Debug/net8.0/LibrarieModele.pdb
+	modified:   NivelStocareDate/bin/Debug/net8.0/NivelStocareDate.dll
+	modified:   NivelStocareDate/bin/Debug/net8.0/NivelStocareDate.pdb
+	modified:   NivelStocareDate/obj/Debug/net8.0/NivelStocareDate.AssemblyInfo.cs
+	modified:   NivelStocareDate/obj/Debug/net8.0/NivelStocareDate.AssemblyInfoInputs.cache
+	modified:   NivelStocareDate/obj/Debug/net8.0/NivelStocareDate.GeneratedMSBuildEditorConfig.editorconfig
+	modified:   NivelStocareDate/obj/Debug/net8.0/NivelStocareDate.csproj.AssemblyReference.cache
+	modified:   NivelStocareDate/obj/Debug/net8.0/NivelStocareDate.csproj.FileListAbsolute.txt
+	modified:   NivelStocareDate/obj/Debug/net8.0/NivelStocareDate.dll
+	modified:   NivelStocareDate/obj/Debug/net8.0/NivelStocareDate.pdb
+	modified:   NivelStocareDate/obj/Debug/net8.0/ref/NivelStocareDate.dll
+	modified:   NivelStocareDate/obj/Debug/net8.0/refint/NivelStocareDate.dll
+	modified:   WPF/MainWindow.xaml
+	modified:   WPF/MainWindow.xaml.cs
+	modified:   WPF/bin/Debug/net8.0-windows/Gestionarea_lemnului_copie.dll
+	modified:   WPF/bin/Debug/net8.0-windows/Gestionarea_lemnului_copie.exe
+	modified:   WPF/bin/Debug/net8.0-windows/Gestionarea_lemnului_copie.pdb
+	modified:   WPF/bin/Debug/net8.0-windows/LibrarieModele.dll
+	modified:   WPF/bin/Debug/net8.0-windows/LibrarieModele.pdb
+	modified:   WPF/bin/Debug/net8.0-windows/NivelStocareDate.dll
+	modified:   WPF/bin/Debug/net8.0-windows/NivelStocareDate.pdb
+	modified:   WPF/bin/Debug/net8.0-windows/WPF.dll
+	modified:   WPF/bin/Debug/net8.0-windows/WPF.exe
+	modified:   WPF/bin/Debug/net8.0-windows/WPF.pdb
+	modified:   WPF/obj/Debug/net8.0-windows/MainWindow.baml
+	modified:   WPF/obj/Debug/net8.0-windows/MainWindow.g.cs
+	modified:   WPF/obj/Debug/net8.0-windows/MainWindow.g.i.cs
+	modified:   WPF/obj/Debug/net8.0-windows/WPF.AssemblyInfo.cs
+	modified:   WPF/obj/Debug/net8.0-windows/WPF.AssemblyInfoInputs.cache
+	modified:   WPF/obj/Debug/net8.0-windows/WPF.csproj.AssemblyReference.cache
+	modified:   WPF/obj/Debug/net8.0-windows/WPF.csproj.FileListAbsolute.txt
+	modified:   WPF/obj/Debug/net8.0-windows/WPF.dll
+	modified:   WPF/obj/Debug/net8.0-windows/WPF.g.resources
+	modified:   WPF/obj/Debug/net8.0-windows/WPF.pdb
+	modified:   WPF/obj/Debug/net8.0-windows/WPF.sourcelink.json
+	modified:   WPF/obj/Debug/net8.0-windows/apphost.exe
+	modified:   WPF/obj/Debug/net8.0-windows/ref/WPF.dll
+	modified:   WPF/obj/Debug/net8.0-windows/refint/WPF.dll
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.vs/
+	Gestionarea_lemnului_copie/obj/Debug/net8.0/Gestionarea_lemnului_copie.sourcelink.json
+	LibrarieModele/obj/Debug/net8.0/LibrarieModele.sourcelink.json
+	NivelStocareDate/obj/Debug/net8.0/NivelStocareDate.sourcelink.json
+	WPF/App.config
+	WPF/Desktop - Shortcut.lnk
+	WPF/bin/Debug/net8.0-windows/WPF.dll.config
+	WPF/date.txt
+	WPF/date_lemn.txt
+	git-error.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
