@@ -88,6 +88,14 @@
 							Background="#2C3E2D" Foreground="White"
 							BorderThickness="0" Cursor="Hand"
 							Click="btnAdaugaClient_Click"/>
+					<Button Content="Editeaza" Width="100" Height="35"
+							Background="#5C6D3A" Foreground="White"
+							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+							Click="btnEditeazaClient_Click"/>
+					<Button Content="Sterge" Width="100" Height="35"
+							Background="#B04A3F" Foreground="White"
+							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+							Click="btnStergeClient_Click"/>
 					<Button Content="Afiseaza" Width="100" Height="35"
 							Background="#8FBC5A" Foreground="White"
 							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
@@ -108,7 +116,8 @@
 
 				<DataGrid x:Name="dgClienti"
                           AutoGenerateColumns="False" IsReadOnly="True"
-                          CanUserAddRows="False" Height="220">
+						  CanUserAddRows="False" Height="220"
+						  SelectionChanged="dgClienti_SelectionChanged">
 					<DataGrid.Columns>
 						<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
 						<DataGridTextColumn Header="Nume" Binding="{Binding Nume}" Width="*"/>
@@ -142,14 +151,23 @@
 
 				<StackPanel Orientation="Horizontal" Margin="0,0,0,20">
 					<Button Content="Adauga" Width="100" Height="35"
-                            Background="#2C3E2D" Foreground="White"
-                            BorderThickness="0" Cursor="Hand"
-                            Click="btnAdaugaLemn_Click"/>
+							Background="#2C3E2D" Foreground="White"
+							BorderThickness="0" Cursor="Hand"
+							Click="btnAdaugaLemn_Click"/>
+					<Button Content="Editeaza" Width="100" Height="35"
+							Background="#5C6D3A" Foreground="White"
+							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+							Click="btnEditeazaLemn_Click"/>
+					<Button Content="Sterge" Width="100" Height="35"
+							Background="#B04A3F" Foreground="White"
+							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+							Click="btnStergeLemn_Click"/>
 				</StackPanel>
 
 				<DataGrid x:Name="dgLemnBrut"
                           AutoGenerateColumns="False" IsReadOnly="True"
-                          CanUserAddRows="False" Height="220">
+						  CanUserAddRows="False" Height="220"
+						  SelectionChanged="dgLemnBrut_SelectionChanged">
 					<DataGrid.Columns>
 						<DataGridTextColumn Header="ID" Binding="{Binding Id}"  Width="50"/>
 						<DataGridTextColumn Header="Tip Lemn" Binding="{Binding TipLemn}"  Width="*"/>
@@ -201,11 +219,20 @@
 							BorderThickness="0" Cursor="Hand"
 							HorizontalAlignment="Left"
 							Click="btnAdaugaProcesare_Click"/>
+					<Button Content="Editeaza" Width="100" Height="35"
+							Background="#5C6D3A" Foreground="White"
+							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+							Click="btnEditeazaProcesare_Click"/>
+					<Button Content="Sterge" Width="100" Height="35"
+							Background="#B04A3F" Foreground="White"
+							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+							Click="btnStergeProcesare_Click"/>
 				</StackPanel>
 
 				<DataGrid x:Name="dgProcesari"
                           AutoGenerateColumns="False" IsReadOnly="True"
-                          CanUserAddRows="False" Height="220">
+						  CanUserAddRows="False" Height="220"
+						  SelectionChanged="dgProcesari_SelectionChanged">
 					<DataGrid.Columns>
 						<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
 						<DataGridTextColumn Header="Tip lemn" Binding="{Binding LemnInitial.TipLemn}" Width="90"/>
@@ -219,6 +246,35 @@
 							</DataGridTextColumn.Binding>
 						</DataGridTextColumn>
 						<DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat=dd/MM/yyyy}" Width="100"/>
+					</DataGrid.Columns>
+				</DataGrid>
+
+
+				<TextBlock Text="Produse in stoc" FontSize="16" FontWeight="Bold"
+						   Foreground="#2C3E2D" Margin="0,20,0,10"/>
+				<TextBlock Text="Cantitate produs (mc):" Foreground="#333"/>
+				<TextBox x:Name="txtCantitateProdusEdit" Margin="0,4,0,10" Padding="6"/>
+				<TextBlock x:Name="txtMesajProdus" Margin="0,0,0,10"/>
+				<StackPanel Orientation="Horizontal" Margin="0,0,0,20">
+					<Button Content="Editeaza" Width="100" Height="35"
+							Background="#5C6D3A" Foreground="White"
+							BorderThickness="0" Cursor="Hand"
+							Click="btnEditeazaProdus_Click"/>
+					<Button Content="Sterge" Width="100" Height="35"
+							Background="#B04A3F" Foreground="White"
+							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+							Click="btnStergeProdus_Click"/>
+				</StackPanel>
+
+				<DataGrid x:Name="dgProduse"
+						  AutoGenerateColumns="False" IsReadOnly="True"
+						  CanUserAddRows="False" Height="220"
+						  SelectionChanged="dgProduse_SelectionChanged">
+					<DataGrid.Columns>
+						<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+						<DataGridTextColumn Header="Tip" Binding="{Binding TipProdus}" Width="*"/>
+						<DataGridTextColumn Header="Cantitate" Binding="{Binding Cantitate, StringFormat={}{0} mc}" Width="120"/>
+						<DataGridTextColumn Header="Caracteristici" Binding="{Binding Caracteristici}" Width="160"/>
 					</DataGrid.Columns>
 				</DataGrid>
 
@@ -253,11 +309,20 @@
 							BorderThickness="0" Cursor="Hand"
 							HorizontalAlignment="Left"
 							Click="btnAdaugaVanzare_Click"/>
+					<Button Content="Editeaza" Width="100" Height="35"
+							Background="#5C6D3A" Foreground="White"
+							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+							Click="btnEditeazaVanzare_Click"/>
+					<Button Content="Sterge" Width="100" Height="35"
+							Background="#B04A3F" Foreground="White"
+							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
+							Click="btnStergeVanzare_Click"/>
 				</StackPanel>
 
 				<DataGrid x:Name="dgVanzari"
                           AutoGenerateColumns="False" IsReadOnly="True"
-                          CanUserAddRows="False" Height="220">
+						  CanUserAddRows="False" Height="220"
+						  SelectionChanged="dgVanzari_SelectionChanged">
 					<DataGrid.Columns>
 						<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
 						<DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat=dd/MM/yyyy}" Width="100"/>

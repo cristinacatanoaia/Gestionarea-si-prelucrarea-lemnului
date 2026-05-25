@@ -47,6 +47,13 @@ namespace NivelStocareDate
 			return true;
 		}
 
+		public bool DeleteClient(int id)
+		{
+			Client clientExistent = clienti.FirstOrDefault(c => c.Id == id);
+			if (clientExistent == null) return false;
+			return clienti.Remove(clientExistent);
+		}
+
 		private int GetNextId()
 		{
 			if (clienti.Count == 0) return 1;

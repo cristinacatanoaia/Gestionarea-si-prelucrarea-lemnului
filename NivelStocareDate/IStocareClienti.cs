@@ -14,5 +14,6 @@ namespace NivelStocareDate
 		Client GetClient(int id);
 		Client GetClient(string nume);
 		bool UpdateClient(Client client);
+		bool DeleteClient(int id);
 	}
 }

@@ -14,5 +14,6 @@ namespace NivelStocareDate
 		LemnBrut GetLemnBrut(int id);
 		LemnBrut GetLemnBrut(TipLemnEnum tip);
 		bool UpdateLemnBrut(LemnBrut lemn);
+		bool DeleteLemnBrut(int id);
 	}
 }

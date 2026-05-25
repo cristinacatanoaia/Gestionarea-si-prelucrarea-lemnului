@@ -107,6 +107,25 @@ namespace NivelStocareDate
 			return actualizareCuSucces;
 		}
 
+		public bool DeleteClient(int id)
+		{
+			List<Client> clienti = GetClienti();
+			bool gasit = false;
+			using (StreamWriter streamWriterFisierText = new StreamWriter(numeFisier, false))
+			{
+				foreach (Client client in clienti)
+				{
+					if (client.Id == id)
+					{
+						gasit = true;
+						continue;
+					}
+					streamWriterFisierText.WriteLine(client.ConversieLaSirPentruFisier());
+				}
+			}
+			return gasit;
+		}
+
 		private int GetNextIdClient()
 		{
 			List<Client> clienti = GetClienti();

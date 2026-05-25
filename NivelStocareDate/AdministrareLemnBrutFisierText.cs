@@ -92,6 +92,25 @@ namespace NivelStocareDate
 			return true;
 		}
 
+		public bool DeleteLemnBrut(int id)
+		{
+			List<LemnBrut> stoc = GetStocLemn();
+			bool gasit = false;
+			using (StreamWriter sw = new StreamWriter(numeFisier, false))
+			{
+				foreach (LemnBrut l in stoc)
+				{
+					if (l.Id == id)
+					{
+						gasit = true;
+						continue;
+					}
+					sw.WriteLine(l.ConversieLaSirPentruFisier());
+				}
+			}
+			return gasit;
+		}
+
 		private int GetNextId()
 		{
 			List<LemnBrut> stoc = GetStocLemn();

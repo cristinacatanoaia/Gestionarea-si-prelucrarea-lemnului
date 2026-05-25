@@ -47,6 +47,13 @@ namespace NivelStocareDate
 			return true;
 		}
 
+		public bool DeleteLemnBrut(int id)
+		{
+			LemnBrut existent = stoc.FirstOrDefault(l => l.Id == id);
+			if (existent == null) return false;
+			return stoc.Remove(existent);
+		}
+
 		private int GetNextId()
 		{
 			if (stoc.Count == 0) return 1;
