@@ -4,6 +4,19 @@
         Title="Gestionare Lemn" Height="600" Width="900"
 	MinWidth="820" MinHeight="560"
         WindowStartupLocation="CenterScreen">
+	<Window.Resources>
+		<Style TargetType="TextBox">
+			<Style.Triggers>
+				<Trigger Property="Validation.HasError" Value="True">
+					<Setter Property="ToolTip"
+							Value="{Binding RelativeSource={RelativeSource Self},
+							Path=(Validation.Errors)[0].ErrorContent}"/>
+					<Setter Property="BorderBrush" Value="Red"/>
+					<Setter Property="BorderThickness" Value="2"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
 
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -11,7 +24,7 @@
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 
-		<!-- MENIU LATERAL -->
+		
 		<StackPanel Grid.Column="0" Background="#2C3E2D">
 
 			<TextBlock Text="Gestionare Lemn"
@@ -25,14 +38,6 @@
                     HorizontalContentAlignment="Left" Padding="15,0"
                     FontSize="13" Cursor="Hand"
                     Click="btnMenuClienti_Click"/>
-
-			<Button Content="Modifica Clienti"
-                    Background="Transparent" Foreground="White"
-                    BorderThickness="1" Height="45"
-                    HorizontalContentAlignment="Left" Padding="15,0"
-                    FontSize="13" Cursor="Hand"
-                    Click="btnMenuModificaClienti_Click"/>
-
 			<Button Content="Lemn Brut"
                     Background="#2C3E2D" Foreground="White"
                     BorderThickness="1" Height="45"
@@ -45,7 +50,6 @@
 					HorizontalContentAlignment="Left" Padding="15,0"
 					FontSize="13" Cursor="Hand"
 					Click="btnMenuProcesare_Click"/>
-
 			<Button Content="Vanzare"
 					Background="Transparent" Foreground="White"
 					BorderThickness="1" Height="45"
@@ -67,13 +71,16 @@
                            Foreground="#2C3E2D" Margin="0,0,0,20"/>
 
 				<TextBlock x:Name="lblNume" Text="Nume:" Foreground="#333"/>
-				<TextBox x:Name="txtNume" Padding="6" Width="659"/>
+				<TextBox x:Name="txtNume" Padding="6" Width="659" BorderThickness="1" BorderBrush="Gray"
+						 Text="{Binding Nume, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
-				<TextBlock x:Name="lblTelefon" Text="Telefon:" Foreground="#333"/>
-				<TextBox x:Name="txtTelefon" Margin="0,4,0,10" Padding="6"/>
+				<TextBlock x:Name="lblTelefon" Text="Telefon (10 cifre):" Foreground="#333" Margin="0,10,0,0"/>
+				<TextBox x:Name="txtTelefon" Margin="0,4,0,10" Padding="6" BorderThickness="1" BorderBrush="Gray"
+						 Text="{Binding Telefon, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
-				<TextBlock x:Name="lblEmail" Text="Email:" Foreground="#333"/>
-				<TextBox x:Name="txtEmail" Margin="0,4,0,10" Padding="6"/>
+				<TextBlock x:Name="lblEmail" Text="Email (cu @):" Foreground="#333"/>
+				<TextBox x:Name="txtEmail" Margin="0,4,0,10" Padding="6" BorderThickness="1" BorderBrush="Gray"
+						 Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"/>
 
 				<!-- Butoane principale -->
 				<StackPanel Orientation="Horizontal" Margin="0,0,0,20">
@@ -87,41 +94,26 @@
 							Click="btnAfiseazaClienti_Click"/>
 				</StackPanel>
 
-				<TextBlock x:Name="txtMesajClient" Margin="0,0,0,10"/>
-
-				<!-- Cautare - rand separat -->
-				<TextBlock Text="Cautare dupa nume:" Foreground="#333" Margin="0,0,0,4"/>
-				<StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-					<TextBox x:Name="txtCautareClient" Padding="6" Width="200" Margin="0,0,10,0"/>
+				<TextBlock Text="Cauta client dupa nume:" Foreground="#333"/>
+				<StackPanel Orientation="Horizontal" Margin="0,4,0,10">
+					<TextBox x:Name="txtCautaClient" Width="300" Padding="6" BorderThickness="1" BorderBrush="Gray"/>
 					<Button Content="Cauta" Width="100" Height="35"
-							Background="#5A7A8F" Foreground="White"
-							BorderThickness="0" Cursor="Hand"
+							Background="#2C3E2D" Foreground="White"
+							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
 							Click="btnCautaClient_Click"/>
 				</StackPanel>
-				<TextBlock x:Name="txtRezultatCautareClient" Foreground="#333"
-							Margin="0,0,0,10" TextWrapping="Wrap"/>
 
-				<DataGrid x:Name="dgCautareClienti"
-                          AutoGenerateColumns="False" IsReadOnly="True"
-                          CanUserAddRows="False" Height="220"
-                          Visibility="Collapsed">
-					<DataGrid.Columns>
-						<DataGridTextColumn Header="ID"      Binding="{Binding Id}"      Width="50"/>
-						<DataGridTextColumn Header="Nume"    Binding="{Binding Nume}"    Width="*"/>
-						<DataGridTextColumn Header="Telefon" Binding="{Binding Telefon}" Width="120"/>
-						<DataGridTextColumn Header="Email"   Binding="{Binding Email}"   Width="180"/>
-					</DataGrid.Columns>
-				</DataGrid>
+				<TextBlock x:Name="txtMesajClient" Margin="0,0,0,10" FontSize="13" FontWeight="Bold"/>
 
 
 				<DataGrid x:Name="dgClienti"
                           AutoGenerateColumns="False" IsReadOnly="True"
                           CanUserAddRows="False" Height="220">
 					<DataGrid.Columns>
-						<DataGridTextColumn Header="ID"      Binding="{Binding Id}"      Width="50"/>
-						<DataGridTextColumn Header="Nume"    Binding="{Binding Nume}"    Width="*"/>
+						<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
+						<DataGridTextColumn Header="Nume" Binding="{Binding Nume}" Width="*"/>
 						<DataGridTextColumn Header="Telefon" Binding="{Binding Telefon}" Width="120"/>
-						<DataGridTextColumn Header="Email"   Binding="{Binding Email}"   Width="180"/>
+						<DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="180"/>
 					</DataGrid.Columns>
 				</DataGrid>
 
@@ -153,18 +145,14 @@
                             Background="#2C3E2D" Foreground="White"
                             BorderThickness="0" Cursor="Hand"
                             Click="btnAdaugaLemn_Click"/>
-					<Button Content="Afiseaza" Width="100" Height="35"
-                            Background="#8FBC5A" Foreground="White"
-                            BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
-                            Click="btnAfiseazaLemn_Click"/>
 				</StackPanel>
 
 				<DataGrid x:Name="dgLemnBrut"
                           AutoGenerateColumns="False" IsReadOnly="True"
                           CanUserAddRows="False" Height="220">
 					<DataGrid.Columns>
-						<DataGridTextColumn Header="ID"             Binding="{Binding Id}"          Width="50"/>
-						<DataGridTextColumn Header="Tip Lemn"       Binding="{Binding TipLemn}"     Width="*"/>
+						<DataGridTextColumn Header="ID" Binding="{Binding Id}"  Width="50"/>
+						<DataGridTextColumn Header="Tip Lemn" Binding="{Binding TipLemn}"  Width="*"/>
 						<DataGridTextColumn Header="Cantitate (mc)" Binding="{Binding CantitateMc}" Width="140"/>
 					</DataGrid.Columns>
 				</DataGrid>
@@ -176,15 +164,17 @@
 				<TextBlock Text="Procesare Lemn" FontSize="20" FontWeight="Bold"
                Foreground="#2C3E2D" Margin="0,0,0,20"/>
 
-				<!-- Tip lemn cu RadioButton -->
+				
 				<TextBlock x:Name="lblTipLemnProcesare" Text="Tip Lemn:" Foreground="#333"/>
 				<StackPanel Orientation="Horizontal" Margin="0,4,0,10">
-					<RadioButton x:Name="rdoMolid" Content="Molid" Margin="0,0,15,0" GroupName="TipLemn"/>
-					<RadioButton x:Name="rdoBrad" Content="Brad" Margin="0,0,15,0" GroupName="TipLemn"/>
-					<RadioButton x:Name="rdoFag" Content="Fag" Margin="0,0,15,0" GroupName="TipLemn"/>
-					<RadioButton x:Name="rdoStejar" Content="Stejar" Margin="0,0,15,0" GroupName="TipLemn"/>
-					<RadioButton x:Name="rdoPin" Content="Pin" GroupName="TipLemn"/>
+					<RadioButton x:Name="rdoMolid" Content="Molid" Margin="0,0,15,0" GroupName="TipLemn" Checked="TipLemnProcesare_Checked"/>
+					<RadioButton x:Name="rdoBrad" Content="Brad" Margin="0,0,15,0" GroupName="TipLemn" Checked="TipLemnProcesare_Checked"/>
+					<RadioButton x:Name="rdoFag" Content="Fag" Margin="0,0,15,0" GroupName="TipLemn" Checked="TipLemnProcesare_Checked"/>
+					<RadioButton x:Name="rdoStejar" Content="Stejar" Margin="0,0,15,0" GroupName="TipLemn" Checked="TipLemnProcesare_Checked"/>
+					<RadioButton x:Name="rdoPin" Content="Pin" GroupName="TipLemn" Checked="TipLemnProcesare_Checked"/>
 				</StackPanel>
+
+				<TextBlock x:Name="txtCantitateDisponibila" Margin="0,0,0,10" Foreground="#333"/>
 
 				<!-- Cantitate procesata -->
 				<TextBlock x:Name="lblCantProcesare" Text="Cantitate procesata (mc):" Foreground="#333"/>
@@ -194,13 +184,12 @@
 				<TextBlock Text="Produs rezultat:" Foreground="#333"/>
 				<ComboBox x:Name="cmbTipProdusProcesare" Margin="0,4,0,10" Padding="6"/>
 
-				<!-- Caracteristici cu CheckBox -->
+				
 				<TextBlock Text="Caracteristici produs:" Foreground="#333"/>
 				<StackPanel Orientation="Horizontal" Margin="0,4,0,10">
 					<CheckBox x:Name="chkUscat" Content="Uscat" Margin="0,0,15,0"/>
 					<CheckBox x:Name="chkTratat" Content="Tratat" Margin="0,0,15,0"/>
 					<CheckBox x:Name="chkLustruit" Content="Lustruit" Margin="0,0,15,0"/>
-					<CheckBox x:Name="chkIgnifugat" Content="Ignifugat" Margin="0,0,15,0"/>
 					<CheckBox x:Name="chkCertificat" Content="Certificat"/>
 				</StackPanel>
 
@@ -208,14 +197,10 @@
 
 				<StackPanel Orientation="Horizontal" Margin="0,0,0,20">
 					<Button Content="Adauga" Width="100" Height="35"
-            Background="#2C3E2D" Foreground="White"
-            BorderThickness="0" Cursor="Hand"
-            HorizontalAlignment="Left"
-            Click="btnAdaugaProcesare_Click"/>
-					<Button Content="Afiseaza" Width="100" Height="35"
-                            Background="#8FBC5A" Foreground="White"
-                            BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
-                            Click="btnAfiseazaProcesari_Click"/>
+							Background="#2C3E2D" Foreground="White"
+							BorderThickness="0" Cursor="Hand"
+							HorizontalAlignment="Left"
+							Click="btnAdaugaProcesare_Click"/>
 				</StackPanel>
 
 				<DataGrid x:Name="dgProcesari"
@@ -224,8 +209,15 @@
 					<DataGrid.Columns>
 						<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
 						<DataGridTextColumn Header="Tip lemn" Binding="{Binding LemnInitial.TipLemn}" Width="90"/>
-						<DataGridTextColumn Header="Cantitate" Binding="{Binding CantitateProcessata}" Width="90"/>
-						<DataGridTextColumn Header="Produs rezultat" Binding="{Binding ProduseRezultate[0].TipProdus}" Width="*"/>
+						<DataGridTextColumn Header="Cantitate" Binding="{Binding CantitateProcessata, StringFormat={}{0} mc}" Width="110"/>
+						<DataGridTextColumn Header="Produs rezultat" Width="*">
+							<DataGridTextColumn.Binding>
+								<MultiBinding StringFormat="{}{0} ({1})">
+									<Binding Path="ProduseRezultate[0].TipProdus"/>
+									<Binding Path="ProduseRezultate[0].Caracteristici"/>
+								</MultiBinding>
+							</DataGridTextColumn.Binding>
+						</DataGridTextColumn>
 						<DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat=dd/MM/yyyy}" Width="100"/>
 					</DataGrid.Columns>
 				</DataGrid>
@@ -245,7 +237,10 @@
 				<ComboBox x:Name="cmbClientVanzare" Margin="0,4,0,10" Padding="6" DisplayMemberPath="Nume"/>
 
 				<TextBlock x:Name="lblProdusVanzare" Text="Tip produs:" Foreground="#333"/>
-				<ComboBox x:Name="cmbProdusVanzare" Margin="0,4,0,10" Padding="6"/>
+				<ComboBox x:Name="cmbProdusVanzare" Margin="0,4,0,10" Padding="6"
+						SelectionChanged="CmbProdusVanzare_SelectionChanged"/>
+
+				<TextBlock x:Name="txtCantitateDisponibilaVanzare" Margin="0,0,0,10" Foreground="#333"/>
 
 				<TextBlock x:Name="lblCantVanzare" Text="Cantitate (mc):" Foreground="#333"/>
 				<TextBox x:Name="txtCantVanzare" Margin="0,4,0,10" Padding="6"/>
@@ -254,14 +249,10 @@
 
 				<StackPanel Orientation="Horizontal" Margin="0,0,0,20">
 					<Button Content="Adauga" Width="100" Height="35"
-            Background="#2C3E2D" Foreground="White"
-            BorderThickness="0" Cursor="Hand"
-            HorizontalAlignment="Left"
-            Click="btnAdaugaVanzare_Click"/>
-					<Button Content="Afiseaza" Width="100" Height="35"
-                            Background="#8FBC5A" Foreground="White"
-                            BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
-                            Click="btnAfiseazaVanzari_Click"/>
+							Background="#2C3E2D" Foreground="White"
+							BorderThickness="0" Cursor="Hand"
+							HorizontalAlignment="Left"
+							Click="btnAdaugaVanzare_Click"/>
 				</StackPanel>
 
 				<DataGrid x:Name="dgVanzari"
@@ -271,48 +262,18 @@
 						<DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="50"/>
 						<DataGridTextColumn Header="Data" Binding="{Binding Data, StringFormat=dd/MM/yyyy}" Width="100"/>
 						<DataGridTextColumn Header="Client" Binding="{Binding Client.Nume}" Width="*"/>
-						<DataGridTextColumn Header="Produs" Binding="{Binding Produs.TipProdus}" Width="140"/>
-						<DataGridTextColumn Header="Cantitate" Binding="{Binding Cantitate}" Width="90"/>
+						<DataGridTextColumn Header="Produs" Width="180">
+							<DataGridTextColumn.Binding>
+								<MultiBinding StringFormat="{}{0} ({1})">
+									<Binding Path="Produs.TipProdus"/>
+									<Binding Path="Produs.Caracteristici"/>
+								</MultiBinding>
+							</DataGridTextColumn.Binding>
+						</DataGridTextColumn>
+						<DataGridTextColumn Header="Cantitate" Binding="{Binding Cantitate, StringFormat={}{0} mc}" Width="110"/>
 					</DataGrid.Columns>
-				</DataGrid>
-!-- PANOUL MODIFICA CLIENTI -->
-			<StackPanel x:Name="panelModificaClienti" Margin="30" Visibility="Collapsed">
-
-				<TextBlock Text="Modifica Clienti"
-                           FontSize="20" FontWeight="Bold"
-                           Foreground="#2C3E2D" Margin="0,0,0,20"/>
-
-				<TextBlock Text="Selecteaza client:" Foreground="#333"/>
-				<ComboBox x:Name="cmbClientModifica" Margin="0,4,0,10" Padding="6" 
-						  DisplayMemberPath="Nume" SelectionChanged="cmbClientModifica_SelectionChanged"/>
-
-				<TextBlock x:Name="lblNumeModifica" Text="Nume:" Foreground="#333"/>
-				<TextBox x:Name="txtNumeModifica" Padding="6" Width="659" Margin="0,4,0,10"/>
-
-				<TextBlock x:Name="lblTelefonModifica" Text="Telefon:" Foreground="#333"/>
-				<TextBox x:Name="txtTelefonModifica" Margin="0,4,0,10" Padding="6"/>
-
-				<TextBlock x:Name="lblEmailModifica" Text="Email:" Foreground="#333"/>
-				<TextBox x:Name="txtEmailModifica" Margin="0,4,0,10" Padding="6"/>
-
-				<TextBlock x:Name="lblDataActualizare" Text="Data actualizare (DatePicker):" Foreground="#333"/>
-				<DatePicker x:Name="dtpDataActualizare" Margin="0,4,0,10" SelectedDateFormat="Short" IsEnabled="False"/>
-
-				<TextBlock x:Name="txtMesajModifica" Margin="0,0,0,10" Foreground="#333"/>
-
-				<StackPanel Orientation="Horizontal" Margin="0,0,0,20">
-					<Button Content="Salveaza" Width="100" Height="35"
-							Background="#2C3E2D" Foreground="White"
-							BorderThickness="0" Cursor="Hand"
-							Click="btnSalveazaModificareClient_Click"/>
-					<Button Content="Anuleaza" Width="100" Height="35"
-							Background="#8FBC5A" Foreground="White"
-							BorderThickness="0" Cursor="Hand" Margin="10,0,0,0"
-							Click="btnAnuleazaModificareClient_Click"/>
-				</StackPanel>
-
-			</StackPanel>
-
+							</DataGrid>
+			
 
 			</StackPanel>
 

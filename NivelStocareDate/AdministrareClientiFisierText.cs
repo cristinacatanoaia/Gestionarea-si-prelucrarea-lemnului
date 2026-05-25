@@ -39,6 +39,10 @@ namespace NivelStocareDate
 				string linieFisier;
 				while ((linieFisier = streamReader.ReadLine()) != null)
 				{
+					if (string.IsNullOrWhiteSpace(linieFisier))
+					{
+						continue;
+					}
 					clienti.Add(new Client(linieFisier));
 				}
 			}
@@ -52,6 +56,10 @@ namespace NivelStocareDate
 				string linieFisier;
 				while ((linieFisier = streamReader.ReadLine()) != null)
 				{
+					if (string.IsNullOrWhiteSpace(linieFisier))
+					{
+						continue;
+					}
 					Client client = new Client(linieFisier);
 					if (client.Id == id)
 						return client;
@@ -67,6 +75,10 @@ namespace NivelStocareDate
 				string linieFisier;
 				while ((linieFisier = streamReader.ReadLine()) != null)
 				{
+					if (string.IsNullOrWhiteSpace(linieFisier))
+					{
+						continue;
+					}
 					Client client = new Client(linieFisier);
 					if (client.Nume.Equals(nume))
 						return client;

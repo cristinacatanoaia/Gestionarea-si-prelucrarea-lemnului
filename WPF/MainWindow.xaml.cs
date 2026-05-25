@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
 using System.Windows;
-using System.Windows.Media;
+using System.Windows.Controls;
+using System.Linq;
 using Gestionarea_lemnului_copie;
 using LibrarieModele;
 using NivelStocareDate;
@@ -10,647 +9,488 @@ namespace WPF
 {
 	public partial class MainWindow : Window
 	{
-		// Constante validare Client
-		
-		private const int LUNGIME_TELEFON = 10;
-
-		// Constante validare LemnBrut
-		private const double CANTITATE_MIN = 0.1;
-		private const double CANTITATE_MAX = 10000.0;
-		private readonly List<string> produseDisponibile = new List<string> { "Scandura", "Panou", "Grinda", "Lambriu", "Placaj" };
-
 		private IStocareClienti stocareClienti;
 		private IStocareLemnBrut stocareLemn;
 		private readonly List<Procesare> procesari = new List<Procesare>();
+		private readonly List<ProdusLemn> produse = new List<ProdusLemn>();
 		private readonly List<Vanzare> vanzari = new List<Vanzare>();
+		private readonly ClientFormViewModel clientForm;
 
 		public MainWindow()
 		{
 			InitializeComponent();
+			clientForm = new ClientFormViewModel();
+			DataContext = clientForm;
 			stocareClienti = StocareFactory.GetStocareClienti();
 			stocareLemn = StocareFactory.GetStocareLemnBrut();
 			SetProduseDisponibile();
 			RefreshClientiDisponibili();
 			RefreshProduseVanzareDisponibile();
+			RefreshLemnGrid();
 		}
 
 		private void SetProduseDisponibile()
 		{
-			cmbTipProdusProcesare.ItemsSource = produseDisponibile;
-			cmbTipProdusProcesare.SelectedIndex = 0;
-		}
-
-		private void RefreshProduseVanzareDisponibile()
-		{
-			List<string> produseDisponibilePentruVanzare = procesari
-				.SelectMany(procesare => procesare.ProduseRezultate)
-				.Where(prod => prod.Cantitate > 0)
-				.Select(prod => prod.TipProdus)
-				.Distinct()
-				.ToList();
-
-			cmbProdusVanzare.ItemsSource = null;
-			cmbProdusVanzare.ItemsSource = produseDisponibilePentruVanzare;
-			cmbProdusVanzare.SelectedIndex = produseDisponibilePentruVanzare.Count > 0 ? 0 : -1;
+			string[] tipuri = new[] { "Scandura", "Grinda", "Cherestea", "Pal", "Bricheta" };
+			cmbTipProdusProcesare.ItemsSource = tipuri;
+			if (cmbTipProdusProcesare.Items.Count > 0)
+			{
+				cmbTipProdusProcesare.SelectedIndex = 0;
+			}
 		}
 
 		private void RefreshClientiDisponibili()
 		{
-			cmbClientVanzare.ItemsSource = null;
-			cmbClientVanzare.ItemsSource = stocareClienti.GetClienti().ToList();
+			try
+			{
+				var clienti = stocareClienti.GetClienti();
+				cmbClientVanzare.ItemsSource = clienti;
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show($"Eroare la refresh clienti: {ex.Message}");
+			}
 		}
 
-		private void AscundeToatePanourile()
+		private void RefreshProduseVanzareDisponibile()
 		{
-			panelClienti.Visibility = Visibility.Collapsed;
+			cmbProdusVanzare.ItemsSource = null;
+			cmbProdusVanzare.ItemsSource = produse;
+			cmbProdusVanzare.DisplayMemberPath = "TipProdus";
+		}
+
+		private void btnMenuClienti_Click(object sender, RoutedEventArgs e)
+		{
+			panelClienti.Visibility = Visibility.Visible;
 			panelLemnBrut.Visibility = Visibility.Collapsed;
 			panelProcesare.Visibility = Visibility.Collapsed;
 			panelVanzare.Visibility = Visibility.Collapsed;
 		}
 
-		private void btnMenuClienti_Click(object sender, RoutedEventArgs e)
-		{
-			AscundeToatePanourile();
-			panelClienti.Visibility = Visibility.Visible;
-			RefreshClientiDisponibili();
-		}
-
 		private void btnMenuLemnBrut_Click(object sender, RoutedEventArgs e)
 		{
-			AscundeToatePanourile();
+			panelClienti.Visibility = Visibility.Collapsed;
 			panelLemnBrut.Visibility = Visibility.Visible;
+			panelProcesare.Visibility = Visibility.Collapsed;
+			panelVanzare.Visibility = Visibility.Collapsed;
+		}
+
+		private void btnMenuProcesare_Click(object sender, RoutedEventArgs e)
+		{
+			panelClienti.Visibility = Visibility.Collapsed;
+			panelLemnBrut.Visibility = Visibility.Collapsed;
+			panelProcesare.Visibility = Visibility.Visible;
+			panelVanzare.Visibility = Visibility.Collapsed;
+		}
+
+		private void btnMenuVanzare_Click(object sender, RoutedEventArgs e)
+		{
+			panelClienti.Visibility = Visibility.Collapsed;
+			panelLemnBrut.Visibility = Visibility.Collapsed;
+			panelProcesare.Visibility = Visibility.Collapsed;
+			panelVanzare.Visibility = Visibility.Visible;
+		}
+
+		private void TipLemnProcesare_Checked(object sender, RoutedEventArgs e)
+		{
+			UpdateCantitateDisponibilaProcesare();
 		}
 
 		// Clienti
 		private void btnAdaugaClient_Click(object sender, RoutedEventArgs e)
 		{
-			
-			lblNume.Foreground = Brushes.Black;
-			lblTelefon.Foreground = Brushes.Black;
-			lblEmail.Foreground = Brushes.Black;
-			txtMesajClient.Text = string.Empty;
+			ResetClientInputs();
+			clientForm.MarkAllTouched();
+			if (!clientForm.IsValid)
+			{
+				string eroare = clientForm.GetFirstError();
+				txtMesajClient.Text = string.IsNullOrWhiteSpace(eroare)
+					? "Corecteaza campurile marcate."
+					: eroare;
+				txtMesajClient.Foreground = System.Windows.Media.Brushes.Red;
+				return;
+			}
 
-			string nume = txtNume.Text.Trim();
-			string telefon = txtTelefon.Text.Trim();
-			string email = txtEmail.Text.Trim();
-
-			// Validare
-			if (string.IsNullOrEmpty(nume))
+			string nume = clientForm.Nume.Trim();
+			try
 			{
-				lblNume.Foreground = Brushes.Red;
-				txtMesajClient.Foreground = Brushes.Red;
-				txtMesajClient.Text = "Introduceti numele!";
-				return;
-			}
-			
-			if (string.IsNullOrEmpty(telefon))
-			{
-				lblTelefon.Foreground = Brushes.Red;
-				txtMesajClient.Foreground = Brushes.Red;
-				txtMesajClient.Text = "Introduceti telefonul!";
-				return;
-			}
-			if (telefon.Length != LUNGIME_TELEFON)
-			{
-				lblTelefon.Foreground = Brushes.Red;
-				txtMesajClient.Foreground = Brushes.Red;
-				txtMesajClient.Text = $"Telefonul trebuie sa aiba exact {LUNGIME_TELEFON} cifre!";
-				return;
-			}
-			foreach (char c in telefon)
-			{
-				if (!char.IsDigit(c))
+				var client = new Client
 				{
-					lblTelefon.Foreground = Brushes.Red;
-					txtMesajClient.Foreground = Brushes.Red;
-					txtMesajClient.Text = "Telefonul trebuie sa contina doar cifre!";
-					return;
-				}
-			}
+					Nume = nume,
+					Telefon = clientForm.Telefon.Trim(),
+					Email = clientForm.Email.Trim()
+				};
+				stocareClienti.AddClient(client);
 
-			
-			if (string.IsNullOrEmpty(email))
-			{
-				lblEmail.Foreground = Brushes.Red;
-				txtMesajClient.Foreground = Brushes.Red;
-				txtMesajClient.Text = "Introduceti emailul!";
-				return;
-			}
-			if (!email.Contains("@") || !email.Contains("."))
-			{
-				lblEmail.Foreground = Brushes.Red;
-				txtMesajClient.Foreground = Brushes.Red;
-				txtMesajClient.Text = "Emailul nu este valid! (ex: nume@domeniu.ro)";
-				return;
-			}
+				txtMesajClient.Text = $" Client '{nume}' adaugat cu succes (ID: {client.Id})!";
+				txtMesajClient.Foreground = System.Windows.Media.Brushes.Green;
 
-			// Validare duplicat
-			if (stocareClienti.GetClient(nume) != null)
-			{
-				lblNume.Foreground = Brushes.Red;
-				txtMesajClient.Foreground = Brushes.Red;
-				txtMesajClient.Text = "Exista deja un client cu acest nume!";
-				return;
+				// Golire campuri
+				clientForm.Clear();
+
+				RefreshClientiDisponibili();
 			}
-
-			
-			Client clientNou = new Client
+			catch (Exception ex)
 			{
-				Nume = nume,
-				Telefon = telefon,
-				Email = email
-			};
-			stocareClienti.AddClient(clientNou);
-			RefreshClientiDisponibili();
+				txtMesajClient.Text = $" Eroare: {ex.Message}";
+				txtMesajClient.Foreground = System.Windows.Media.Brushes.Red;
+			}
+		}
 
-			txtNume.Text = string.Empty;
-			txtTelefon.Text = string.Empty;
-			txtEmail.Text = string.Empty;
-			txtMesajClient.Foreground = Brushes.Green;
-			txtMesajClient.Text = "Client adaugat cu succes!";
+		private void ResetClientInputs()
+		{
+			txtMesajClient.Foreground = System.Windows.Media.Brushes.Black;
+			txtMesajClient.Text = "";
 		}
 
 		private void btnAfiseazaClienti_Click(object sender, RoutedEventArgs e)
 		{
-			dgCautareClienti.Visibility = Visibility.Collapsed;
-			txtRezultatCautareClient.Text = string.Empty;
-			dgClienti.ItemsSource = stocareClienti.GetClienti().ToList();
-			dgClienti.Visibility = Visibility.Visible;
+			try
+			{
+				var clienti = stocareClienti.GetClienti();
+				dgClienti.ItemsSource = null;
+				dgClienti.ItemsSource = clienti;
+				txtMesajClient.Text = $"S-au afișat {clienti.Count} clienți.";
+			}
+			catch (Exception ex)
+			{
+				txtMesajClient.Text = $"Eroare la afișare: {ex.Message}";
+			}
 		}
+
 		private void btnCautaClient_Click(object sender, RoutedEventArgs e)
 		{
-			dgClienti.Visibility = Visibility.Collapsed;
-			string nume = txtCautareClient.Text.Trim();
-
-			if (string.IsNullOrEmpty(nume))
+			string cautare = txtCautaClient.Text.Trim();
+			if (string.IsNullOrEmpty(cautare))
 			{
-				txtRezultatCautareClient.Foreground = Brushes.Red;
-				txtRezultatCautareClient.Text = "Introduceti un nume pentru cautare!";
-				dgCautareClienti.Visibility = Visibility.Collapsed;
+				txtMesajClient.Text = "Introduceti un nume pentru cautare.";
+				txtMesajClient.Foreground = System.Windows.Media.Brushes.Red;
 				return;
 			}
 
-			List<Client> clientiGasiti = stocareClienti.GetClienti()
-				.Where(client => client.Nume.Contains(nume, System.StringComparison.OrdinalIgnoreCase))
-				.ToList();
-
-			if (clientiGasiti.Count == 0)
+			try
 			{
-				txtRezultatCautareClient.Foreground = Brushes.Red;
-				txtRezultatCautareClient.Text = "Nu a fost gasit niciun client cu acest nume!";
-				dgCautareClienti.Visibility = Visibility.Collapsed;
-				return;
-			}
+				var clienti = stocareClienti.GetClienti();
+				var rezultate = clienti
+					.Where(c => !string.IsNullOrEmpty(c.Nume) &&
+						c.Nume.StartsWith(cautare, StringComparison.OrdinalIgnoreCase))
+					.ToList();
 
-			txtRezultatCautareClient.Foreground = Brushes.Green;
-			txtRezultatCautareClient.Text = $"Au fost gasiti {clientiGasiti.Count} client(i).";
-			dgCautareClienti.ItemsSource = clientiGasiti;
-			dgCautareClienti.Visibility = Visibility.Visible;
+				dgClienti.ItemsSource = null;
+				dgClienti.ItemsSource = rezultate;
+
+				if (rezultate.Count == 0)
+				{
+					txtMesajClient.Text = "Nu s-au gasit clienti cu acest nume.";
+					txtMesajClient.Foreground = System.Windows.Media.Brushes.Red;
+				}
+				else
+				{
+					txtMesajClient.Text = $"Gasiti {rezultate.Count} clienti.";
+					txtMesajClient.Foreground = System.Windows.Media.Brushes.Green;
+				}
+			}
+			catch (Exception ex)
+			{
+				txtMesajClient.Text = $"Eroare la cautare: {ex.Message}";
+				txtMesajClient.Foreground = System.Windows.Media.Brushes.Red;
+			}
 		}
 
-
+		// Lemn brut
 		private void btnAdaugaLemn_Click(object sender, RoutedEventArgs e)
 		{
-			// Resetare etichete la culoarea normala
-			lblTipLemn.Foreground = Brushes.Black;
-			lblCantitate.Foreground = Brushes.Black;
-			txtMesajLemn.Text = string.Empty;
-
-			// Validare ListBox (selectare tip lemn)
-			if (lstTipLemn.SelectedIndex == -1)
+			var selectedItem = lstTipLemn.SelectedItem as ListBoxItem;
+			if (selectedItem == null)
 			{
-				lblTipLemn.Foreground = Brushes.Red;
-				txtMesajLemn.Foreground = Brushes.Red;
-				txtMesajLemn.Text = "Selectati tipul de lemn din ListBox!";
+				txtMesajLemn.Text = "Selectați un tip de lemn!";
 				return;
 			}
 
+			string? tipLemn = selectedItem.Content?.ToString();
 			string cantitateText = txtCantitate.Text.Trim();
 
-			// Validare Cantitate
-			if (string.IsNullOrEmpty(cantitateText))
+			if (string.IsNullOrEmpty(tipLemn))
 			{
-				lblCantitate.Foreground = Brushes.Red;
-				txtMesajLemn.Foreground = Brushes.Red;
-				txtMesajLemn.Text = "Introduceti cantitatea!";
-				return;
-			}
-			if (!double.TryParse(cantitateText, out double cantitate))
-			{
-				lblCantitate.Foreground = Brushes.Red;
-				txtMesajLemn.Foreground = Brushes.Red;
-				txtMesajLemn.Text = "Cantitatea trebuie sa fie un numar! (ex: 12.5)";
-				return;
-			}
-			if (cantitate < CANTITATE_MIN)
-			{
-				lblCantitate.Foreground = Brushes.Red;
-				txtMesajLemn.Foreground = Brushes.Red;
-				txtMesajLemn.Text = $"Cantitatea minima este {CANTITATE_MIN} mc!";
-				return;
-			}
-			if (cantitate > CANTITATE_MAX)
-			{
-				lblCantitate.Foreground = Brushes.Red;
-				txtMesajLemn.Foreground = Brushes.Red;
-				txtMesajLemn.Text = $"Cantitatea maxima este {CANTITATE_MAX} mc!";
+				txtMesajLemn.Text = "Tip lemn invalid!";
 				return;
 			}
 
-			// Adaugare lemn brut (folosind valoarea din ListBox)
-			LemnBrut lemnNou = new LemnBrut
+			if (!double.TryParse(cantitateText, out double cantitate) || cantitate <= 0)
 			{
-				TipLemn = (TipLemnEnum)lstTipLemn.SelectedIndex,
-				CantitateMc = cantitate
-			};
-			stocareLemn.AddLemnBrut(lemnNou);
+				txtMesajLemn.Text = "Introduceți o cantitate validă!";
+				return;
+			}
 
-			txtCantitate.Text = string.Empty;
-			lstTipLemn.SelectedIndex = -1;
-			txtMesajLemn.Foreground = Brushes.Green;
-			txtMesajLemn.Text = $"Lemn brut adaugat cu succes! Tip: {lemnNou.TipLemn}, Cantitate: {cantitate} mc";
+			try
+			{
+				if (!Enum.TryParse(typeof(TipLemnEnum), tipLemn, out object? tipEnumObj) || tipEnumObj == null)
+				{
+					txtMesajLemn.Text = "Tip lemn invalid!";
+					return;
+				}
+
+				TipLemnEnum tipEnum = (TipLemnEnum)tipEnumObj;
+				LemnBrut lemnExistent = stocareLemn.GetLemnBrut(tipEnum);
+				if (lemnExistent != null)
+				{
+					lemnExistent.CantitateMc += cantitate;
+					stocareLemn.UpdateLemnBrut(lemnExistent);
+				}
+				else
+				{
+					var lemn = new LemnBrut
+					{
+						TipLemn = tipEnum,
+						CantitateMc = cantitate
+					};
+					stocareLemn.AddLemnBrut(lemn);
+				}
+
+				txtMesajLemn.Text = "Lemn adăugat cu succes!";
+				txtCantitate.Clear();
+				lstTipLemn.SelectedIndex = -1;
+
+				RefreshProduseVanzareDisponibile();
+				RefreshLemnGrid();
+			}
+			catch (Exception ex)
+			{
+				txtMesajLemn.Text = $"Eroare: {ex.Message}";
+			}
 		}
 
-		private void btnAfiseazaLemn_Click(object sender, RoutedEventArgs e)
-		{
-			List<LemnBrut> stoc = stocareLemn.GetStocLemn().ToList();
-			dgLemnBrut.ItemsSource = null;
-			dgLemnBrut.ItemsSource = stoc;
-		}
-
-
-		private void btnMenuProcesare_Click(object sender, RoutedEventArgs e)
-		{
-			AscundeToatePanourile();
-			panelProcesare.Visibility = Visibility.Visible;
-		}
-
-		private void btnMenuVanzare_Click(object sender, RoutedEventArgs e)
-		{
-			AscundeToatePanourile();
-			panelVanzare.Visibility = Visibility.Visible;
-		}
-
-		//procesare
-
+		// Procesare
 		private void btnAdaugaProcesare_Click(object sender, RoutedEventArgs e)
 		{
-			lblTipLemnProcesare.Foreground = Brushes.Black;
-			lblCantProcesare.Foreground = Brushes.Black;
-			txtMesajProcesare.Text = string.Empty;
-			string produsRezultat = cmbTipProdusProcesare.SelectedItem as string ?? string.Empty;
-
-			// Validare tip lemn
-			bool tipSelectat = rdoMolid.IsChecked == true || rdoBrad.IsChecked == true ||
-							   rdoFag.IsChecked == true || rdoStejar.IsChecked == true ||
-							   rdoPin.IsChecked == true;
-			if (!tipSelectat)
+			TipLemnEnum? tipSelectat = GetSelectedTipLemn();
+			if (tipSelectat == null)
 			{
-				lblTipLemnProcesare.Foreground = Brushes.Red;
-				txtMesajProcesare.Foreground = Brushes.Red;
 				txtMesajProcesare.Text = "Selectati tipul de lemn!";
 				return;
 			}
 
-			// Validare cantitate
-			if (string.IsNullOrEmpty(txtCantProcesare.Text.Trim()))
+			if (!double.TryParse(txtCantProcesare.Text.Trim(), out double cantitate) || cantitate <= 0)
 			{
-				lblCantProcesare.Foreground = Brushes.Red;
-				txtMesajProcesare.Foreground = Brushes.Red;
-				txtMesajProcesare.Text = "Introduceti cantitatea procesata!";
-				return;
-			}
-			if (!double.TryParse(txtCantProcesare.Text.Trim(), out double cantitate))
-			{
-				lblCantProcesare.Foreground = Brushes.Red;
-				txtMesajProcesare.Foreground = Brushes.Red;
-				txtMesajProcesare.Text = "Cantitatea trebuie sa fie un numar!";
+				txtMesajProcesare.Text = "Introduceti o cantitate valida!";
 				return;
 			}
 
-			if (string.IsNullOrWhiteSpace(produsRezultat))
+			string? tipProdus = cmbTipProdusProcesare.SelectedItem as string;
+			if (string.IsNullOrWhiteSpace(tipProdus))
 			{
-				txtMesajProcesare.Foreground = Brushes.Red;
-				txtMesajProcesare.Text = "Alegeti produsul rezultat!";
+				txtMesajProcesare.Text = "Selectati tipul produsului!";
 				return;
 			}
 
-			// Determinare tip lemn selectat
-			TipLemnEnum tipLemn = TipLemnEnum.Molid;
-			if (rdoBrad.IsChecked == true) tipLemn = TipLemnEnum.Brad;
-			else if (rdoFag.IsChecked == true) tipLemn = TipLemnEnum.Fag;
-			else if (rdoStejar.IsChecked == true) tipLemn = TipLemnEnum.Stejar;
-			else if (rdoPin.IsChecked == true) tipLemn = TipLemnEnum.Pin;
-
-			List<LemnBrut> lemnDisponibil = stocareLemn.GetStocLemn()
-				.Where(lemn => lemn.TipLemn == tipLemn)
-				.ToList();
-			double cantitateDisponibila = lemnDisponibil.Sum(lemn => lemn.CantitateMc);
-			if (cantitate > cantitateDisponibila)
+			LemnBrut lemn = stocareLemn.GetLemnBrut(tipSelectat.Value);
+			if (lemn == null)
 			{
-				txtMesajProcesare.Foreground = Brushes.Red;
-				txtMesajProcesare.Text = $"Nu exista suficient lemn brut. Disponibil: {cantitateDisponibila} mc.";
+				txtMesajProcesare.Text = "Nu exista lemn brut in stoc pentru tipul selectat!";
 				return;
 			}
 
-			// Determinare caracteristici bifate
-			CaracteristiciProdus caracteristici = CaracteristiciProdus.Niciuna;
-			if (chkUscat.IsChecked == true) caracteristici |= CaracteristiciProdus.Uscat;
-			if (chkTratat.IsChecked == true) caracteristici |= CaracteristiciProdus.Tratat;
-			if (chkLustruit.IsChecked == true) caracteristici |= CaracteristiciProdus.Lustruit;
-			if (chkIgnifugat.IsChecked == true) caracteristici |= CaracteristiciProdus.Ignifugat;
-			if (chkCertificat.IsChecked == true) caracteristici |= CaracteristiciProdus.Certificat;
+			if (cantitate > lemn.CantitateMc)
+			{
+				txtMesajProcesare.Text = "Cantitatea depaseste stocul disponibil!";
+				return;
+			}
 
-			Procesare procesareNoua = new Procesare
+			CaracteristiciProdus caracteristici = GetCaracteristiciSelectate();
+			ProdusLemn produsExistent = produse.FirstOrDefault(p =>
+				p.TipProdus.Equals(tipProdus, StringComparison.OrdinalIgnoreCase) &&
+				p.Caracteristici == caracteristici);
+
+			if (produsExistent == null)
+			{
+				produsExistent = new ProdusLemn
+				{
+					Id = produse.Count + 1,
+					TipProdus = tipProdus,
+					Cantitate = 0,
+					Caracteristici = caracteristici
+				};
+				produse.Add(produsExistent);
+			}
+
+			produsExistent.Cantitate += cantitate;
+
+			lemn.CantitateMc -= cantitate;
+			stocareLemn.UpdateLemnBrut(lemn);
+
+			Procesare procesare = new Procesare
 			{
 				Id = procesari.Count + 1,
-				LemnInitial = new LemnBrut { TipLemn = tipLemn, CantitateMc = cantitate },
+				LemnInitial = lemn,
 				CantitateProcessata = cantitate,
-				Data = DateTime.Now,
-				ProduseRezultate = new List<ProdusLemn>
-				{
-					new ProdusLemn
-					{
-						TipProdus = produsRezultat,
-						Cantitate = cantitate,
-						Caracteristici = caracteristici
-					}
-				}
+				Data = DateTime.Now
 			};
-			procesari.Add(procesareNoua);
-			RefreshProduseVanzareDisponibile();
+			procesare.ProduseRezultate.Add(produsExistent);
+			procesari.Add(procesare);
+			RefreshProcesariGrid();
 
-			double cantitateRamasa = cantitate;
-			foreach (LemnBrut lemn in lemnDisponibil)
+			txtMesajProcesare.Text = "Procesarea a fost inregistrata cu succes!";
+			txtCantProcesare.Clear();
+			ClearTipLemnSelection();
+			if (cmbTipProdusProcesare.Items.Count > 0)
 			{
-				if (cantitateRamasa <= 0)
-				{
-					break;
-				}
-
-				double cantitateDeScazut = Math.Min(lemn.CantitateMc, cantitateRamasa);
-				lemn.CantitateMc -= cantitateDeScazut;
-				cantitateRamasa -= cantitateDeScazut;
-				stocareLemn.UpdateLemnBrut(lemn);
+				cmbTipProdusProcesare.SelectedIndex = 0;
 			}
-
-			txtMesajProcesare.Foreground = Brushes.Green;
-			txtMesajProcesare.Text = $"Procesare adaugata! Lemn: {tipLemn}, Cantitate: {cantitate} mc, Produs: {produsRezultat}, Caracteristici: {caracteristici}";
-
-			ResetareProcesare();
+			ClearCaracteristici();
+			RefreshLemnGrid();
+			RefreshProduseVanzareDisponibile();
 		}
 
-		private void ResetareProcesare()
+		// Vanzare
+		private void btnAdaugaVanzare_Click(object sender, RoutedEventArgs e)
 		{
-			txtCantProcesare.Text = string.Empty;
-			cmbTipProdusProcesare.SelectedIndex = 0;
+			Client client = cmbClientVanzare.SelectedItem as Client;
+			if (client == null)
+			{
+				txtMesajVanzare.Text = "Selectati clientul!";
+				return;
+			}
+
+			ProdusLemn produs = cmbProdusVanzare.SelectedItem as ProdusLemn;
+			if (produs == null)
+			{
+				txtMesajVanzare.Text = "Selectati produsul!";
+				return;
+			}
+
+			if (!double.TryParse(txtCantVanzare.Text.Trim(), out double cantitate) || cantitate <= 0)
+			{
+				txtMesajVanzare.Text = "Introduceti o cantitate valida!";
+				return;
+			}
+
+			if (cantitate > produs.Cantitate)
+			{
+				txtMesajVanzare.Text = "Cantitatea depaseste stocul disponibil!";
+				return;
+			}
+
+			DateTime data = dtpDataVanzare.SelectedDate ?? DateTime.Now;
+
+			Vanzare vanzare = new Vanzare
+			{
+				Id = vanzari.Count + 1,
+				Client = client,
+				Produs = produs,
+				Cantitate = cantitate,
+				Data = data
+			};
+
+			produs.Cantitate -= cantitate;
+			vanzari.Add(vanzare);
+			RefreshVanzariGrid();
+
+			txtMesajVanzare.Text = "Vanzare inregistrata cu succes!";
+			txtCantVanzare.Clear();
+			dtpDataVanzare.SelectedDate = null;
+			RefreshProduseVanzareDisponibile();
+			UpdateCantitateDisponibilaVanzare();
+		}
+
+		private void CmbProdusVanzare_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			UpdateCantitateDisponibilaVanzare();
+		}
+
+		private TipLemnEnum? GetSelectedTipLemn()
+		{
+			if (rdoMolid.IsChecked == true) return TipLemnEnum.Molid;
+			if (rdoBrad.IsChecked == true) return TipLemnEnum.Brad;
+			if (rdoFag.IsChecked == true) return TipLemnEnum.Fag;
+			if (rdoStejar.IsChecked == true) return TipLemnEnum.Stejar;
+			if (rdoPin.IsChecked == true) return TipLemnEnum.Pin;
+			return null;
+		}
+
+		private void UpdateCantitateDisponibilaProcesare()
+		{
+			TipLemnEnum? tipSelectat = GetSelectedTipLemn();
+			if (tipSelectat == null)
+			{
+				txtCantitateDisponibila.Text = string.Empty;
+				return;
+			}
+
+			LemnBrut lemn = stocareLemn.GetLemnBrut(tipSelectat.Value);
+			if (lemn == null)
+			{
+				txtCantitateDisponibila.Text = "Stoc disponibil: 0 mc";
+				return;
+			}
+
+			txtCantitateDisponibila.Text = $"Stoc disponibil: {lemn.CantitateMc} mc";
+		}
+
+		private void ClearTipLemnSelection()
+		{
 			rdoMolid.IsChecked = false;
 			rdoBrad.IsChecked = false;
 			rdoFag.IsChecked = false;
 			rdoStejar.IsChecked = false;
 			rdoPin.IsChecked = false;
+			txtCantitateDisponibila.Text = string.Empty;
+		}
+
+		private CaracteristiciProdus GetCaracteristiciSelectate()
+		{
+			CaracteristiciProdus caracteristici = CaracteristiciProdus.Niciuna;
+			if (chkUscat.IsChecked == true) caracteristici |= CaracteristiciProdus.Uscat;
+			if (chkTratat.IsChecked == true) caracteristici |= CaracteristiciProdus.Tratat;
+			if (chkLustruit.IsChecked == true) caracteristici |= CaracteristiciProdus.Lustruit;
+			if (chkCertificat.IsChecked == true) caracteristici |= CaracteristiciProdus.Certificat;
+			return caracteristici;
+		}
+
+		private void ClearCaracteristici()
+		{
 			chkUscat.IsChecked = false;
 			chkTratat.IsChecked = false;
 			chkLustruit.IsChecked = false;
-			chkIgnifugat.IsChecked = false;
 			chkCertificat.IsChecked = false;
 		}
 
-		// vanzare
-
-		private void btnAdaugaVanzare_Click(object sender, RoutedEventArgs e)
+		private void UpdateCantitateDisponibilaVanzare()
 		{
-			lblClientVanzare.Foreground = Brushes.Black;
-			lblProdusVanzare.Foreground = Brushes.Black;
-			lblCantVanzare.Foreground = Brushes.Black;
-			txtMesajVanzare.Text = string.Empty;
-
-			Client client = cmbClientVanzare.SelectedItem as Client;
-			string produs = cmbProdusVanzare.SelectedItem as string ?? string.Empty;
-			string cantitateText = txtCantVanzare.Text.Trim();
-			DateTime dataVanzare = dtpDataVanzare.SelectedDate ?? DateTime.Today;
-
-			// Validare client
-			if (client == null)
+			ProdusLemn produs = cmbProdusVanzare.SelectedItem as ProdusLemn;
+			if (produs == null)
 			{
-				lblClientVanzare.Foreground = Brushes.Red;
-				txtMesajVanzare.Foreground = Brushes.Red;
-				txtMesajVanzare.Text = "Alegeti clientul!";
+				txtCantitateDisponibilaVanzare.Text = string.Empty;
 				return;
 			}
 
-			// Validare produs
-			if (string.IsNullOrEmpty(produs))
-			{
-				lblProdusVanzare.Foreground = Brushes.Red;
-				txtMesajVanzare.Foreground = Brushes.Red;
-				txtMesajVanzare.Text = "Alegeti tipul produsului!";
-				return;
-			}
-
-			// Validare cantitate
-			if (string.IsNullOrEmpty(cantitateText))
-			{
-				lblCantVanzare.Foreground = Brushes.Red;
-				txtMesajVanzare.Foreground = Brushes.Red;
-				txtMesajVanzare.Text = "Introduceti cantitatea!";
-				return;
-			}
-			if (!double.TryParse(cantitateText, out double cantitate))
-			{
-				lblCantVanzare.Foreground = Brushes.Red;
-				txtMesajVanzare.Foreground = Brushes.Red;
-				txtMesajVanzare.Text = "Cantitatea trebuie sa fie un numar!";
-				return;
-			}
-
-			List<ProdusLemn> stocProdusDisponibil = procesari
-				.SelectMany(procesare => procesare.ProduseRezultate)
-				.Where(prod => prod.TipProdus.Equals(produs, System.StringComparison.OrdinalIgnoreCase) && prod.Cantitate > 0)
-				.ToList();
-			double cantitateDisponibila = stocProdusDisponibil.Sum(prod => prod.Cantitate);
-			if (cantitate > cantitateDisponibila)
-			{
-				lblCantVanzare.Foreground = Brushes.Red;
-				txtMesajVanzare.Foreground = Brushes.Red;
-				txtMesajVanzare.Text = $"Nu exista suficient produs in stoc. Disponibil: {cantitateDisponibila} mc.";
-				return;
-			}
-
-			double cantitateRamasa = cantitate;
-			foreach (ProdusLemn produsStoc in stocProdusDisponibil)
-			{
-				if (cantitateRamasa <= 0)
-				{
-					break;
-				}
-
-				double cantitateDeScazut = Math.Min(produsStoc.Cantitate, cantitateRamasa);
-				produsStoc.Cantitate -= cantitateDeScazut;
-				cantitateRamasa -= cantitateDeScazut;
-			}
-
-			Vanzare vanzareNoua = new Vanzare
-			{
-				Id = vanzari.Count + 1,
-				Client = client,
-				Produs = new ProdusLemn { TipProdus = produs, Cantitate = cantitate, Caracteristici = CaracteristiciProdus.Niciuna },
-				Cantitate = cantitate,
-				Data = dataVanzare
-			};
-			vanzari.Add(vanzareNoua);
-
-			txtMesajVanzare.Foreground = Brushes.Green;
-			txtMesajVanzare.Text = $"Vanzare adaugata! Data: {dataVanzare:dd/MM/yyyy}, Client: {client.Nume}, Produs: {produs}, Cantitate: {cantitate} mc";
-
-			RefreshProduseVanzareDisponibile();
-			ResetareVanzare();
+			txtCantitateDisponibilaVanzare.Text = $"Stoc disponibil: {produs.Cantitate} mc";
 		}
 
-		private void ResetareVanzare()
-		{
-			cmbClientVanzare.SelectedItem = null;
-			cmbProdusVanzare.SelectedIndex = 0;
-			txtCantVanzare.Text = string.Empty;
-			dtpDataVanzare.SelectedDate = DateTime.Today;
-		}
-
-		private void btnAfiseazaVanzari_Click(object sender, RoutedEventArgs e)
-		{
-			dgVanzari.ItemsSource = null;
-			dgVanzari.ItemsSource = vanzari.ToList();
-		}
-
-		private void btnAfiseazaProcesari_Click(object sender, RoutedEventArgs e)
+		private void RefreshProcesariGrid()
 		{
 			dgProcesari.ItemsSource = null;
-			dgProcesari.ItemsSource = procesari.ToList();
+			dgProcesari.ItemsSource = procesari;
 		}
 
-		// ========== MODIFICA CLIENTI ==========
-		private void btnMenuModificaClienti_Click(object sender, RoutedEventArgs e)
+		private void RefreshVanzariGrid()
 		{
-			AscundeToatePanourile();
-			panelModificaClienti.Visibility = Visibility.Visible;
-			RefreshClientiModifica();
+			dgVanzari.ItemsSource = null;
+			dgVanzari.ItemsSource = vanzari;
 		}
 
-		private void RefreshClientiModifica()
+		private void RefreshLemnGrid()
 		{
-			cmbClientModifica.ItemsSource = null;
-			cmbClientModifica.ItemsSource = stocareClienti.GetClienti().ToList();
-			cmbClientModifica.SelectedIndex = -1;
-			AnuleazaModificareClient();
-		}
-
-		private void cmbClientModifica_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
-		{
-			Client clientSelectat = cmbClientModifica.SelectedItem as Client;
-			if (clientSelectat != null)
-			{
-				txtNumeModifica.Text = clientSelectat.Nume;
-				txtTelefonModifica.Text = clientSelectat.Telefon;
-				txtEmailModifica.Text = clientSelectat.Email;
-				dtpDataActualizare.SelectedDate = DateTime.Today;
-				txtMesajModifica.Text = string.Empty;
-			}
-			else
-			{
-				AnuleazaModificareClient();
-			}
-		}
-
-		private void btnSalveazaModificareClient_Click(object sender, RoutedEventArgs e)
-		{
-			Client clientSelectat = cmbClientModifica.SelectedItem as Client;
-			if (clientSelectat == null)
-			{
-				txtMesajModifica.Foreground = Brushes.Red;
-				txtMesajModifica.Text = "Selectati un client!";
-				return;
-			}
-
-			string nume = txtNumeModifica.Text.Trim();
-			string telefon = txtTelefonModifica.Text.Trim();
-			string email = txtEmailModifica.Text.Trim();
-
-			// Validare
-			if (string.IsNullOrEmpty(nume))
-			{
-				txtMesajModifica.Foreground = Brushes.Red;
-				txtMesajModifica.Text = "Introduceti numele!";
-				return;
-			}
-
-			if (string.IsNullOrEmpty(telefon))
-			{
-				txtMesajModifica.Foreground = Brushes.Red;
-				txtMesajModifica.Text = "Introduceti telefonul!";
-				return;
-			}
-			if (telefon.Length != LUNGIME_TELEFON)
-			{
-				txtMesajModifica.Foreground = Brushes.Red;
-				txtMesajModifica.Text = $"Telefonul trebuie sa aiba exact {LUNGIME_TELEFON} cifre!";
-				return;
-			}
-			foreach (char c in telefon)
-			{
-				if (!char.IsDigit(c))
+			var lemn = stocareLemn.GetStocLemn()
+				.Where(item => item.CantitateMc > 0)
+				.Select((item, index) => new LemnBrut
 				{
-					txtMesajModifica.Foreground = Brushes.Red;
-					txtMesajModifica.Text = "Telefonul trebuie sa contina doar cifre!";
-					return;
-				}
-			}
-
-			if (string.IsNullOrEmpty(email))
-			{
-				txtMesajModifica.Foreground = Brushes.Red;
-				txtMesajModifica.Text = "Introduceti emailul!";
-				return;
-			}
-			if (!email.Contains("@") || !email.Contains("."))
-			{
-				txtMesajModifica.Foreground = Brushes.Red;
-				txtMesajModifica.Text = "Emailul nu este valid! (ex: nume@domeniu.ro)";
-				return;
-			}
-
-			// Actualizare client
-			clientSelectat.Nume = nume;
-			clientSelectat.Telefon = telefon;
-			clientSelectat.Email = email;
-			stocareClienti.UpdateClient(clientSelectat);
-			RefreshClientiModifica();
-
-			txtMesajModifica.Foreground = Brushes.Green;
-			txtMesajModifica.Text = "Client actualizat cu succes!";
+					Id = index + 1,
+					TipLemn = item.TipLemn,
+					CantitateMc = item.CantitateMc
+				})
+				.ToList();
+			dgLemnBrut.ItemsSource = null;
+			dgLemnBrut.ItemsSource = lemn;
 		}
-
-		private void btnAnuleazaModificareClient_Click(object sender, RoutedEventArgs e)
-		{
-			AnuleazaModificareClient();
-		}
-
-		private void AnuleazaModificareClient()
-		{
-			cmbClientModifica.SelectedIndex = -1;
-			txtNumeModifica.Text = string.Empty;
-			txtTelefonModifica.Text = string.Empty;
-			txtEmailModifica.Text = string.Empty;
-			dtpDataActualizare.SelectedDate = DateTime.Today;
-			txtMesajModifica.Text = string.Empty;
-		}
-
-		// ========== INTEGRATIONS: ListBox (LemnBrut) & DatePicker (Vanzare) ==========
-		private void btnAdaugaLemn_Click_UpdateListBox(object sender, RoutedEventArgs e)
-		{
-			// ListBox automatically displays items from XAML ListBoxItems
-			// To extract selected value: 
-			// var selected = lstTipLemn.SelectedItem as ListBoxItem;
-			// string tipLemn = selected?.Content.ToString();
-		}
-		
 	}
 }
